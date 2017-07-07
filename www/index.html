@@ -1,0 +1,31 @@
+
+<html>
+    <head>
+        <title>Label</title>
+        
+    </head>
+    <body bgcolor="#4F6E75">
+        <link rel="stylesheet" href="stylesheet.css"/> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="helper.js"></script>
+        <div id="form">
+            <div id="form_sample">
+                <h2> New Label </h2>
+                <hr><br>
+                <label> App: </label><h4 id="app"></h4>
+                <label> Version: </label><h4 id="version"></h4>
+                <label> Host: </label><h4 id="host"></h4>
+                <label> Path: </label><h4 id="path"></h4>
+                <label> Data: </label><h4 id="data"></h4>
+                <br>
+                <div id="container">
+                </div>
+                <h3> Please choose the category. </h3>
+                <select id="options">
+                </select>
+                <br><br><br>
+                <button class="button" onclick="onSubmit()">Submit</button>
+            </div>
+        </div> 
+    </body>
+</html>

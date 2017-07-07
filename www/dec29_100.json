@@ -1,0 +1,1687 @@
+[
+  {
+    "app": "com.ace.cleaner",
+    "version": "6",
+    "host": "net.rayjump.com",
+    "path": "/openapi/ad/v3",
+    "data": [
+      "U_package_name",
+      "U_ad_num",
+      "U_sdk_version",
+      "U_app_id",
+      "U_screen_size",
+      "U_timezone",
+      "U_gaid",
+      "U_mnc",
+      "U_app_version_name",
+      "U_app_version_code",
+      "U_ad_type",
+      "U_only_impression",
+      "U_mcc",
+      "U_ping_mode",
+      "U_model",
+      "U_language",
+      "U_req_type",
+      "U_gp_version",
+      "U_offset",
+      "H_Charset",
+      "U_orientation",
+      "U_sign",
+      "U_brand",
+      "U_category",
+      "U_platform",
+      "U_os_version",
+      "U_useragent",
+      "U_network_type",
+      "U_unit_id"
+    ]
+  },
+  {
+    "app": "com.google.android.syncadapters.contacts",
+    "version": "22",
+    "host": "security.google.com",
+    "path": "/settings/security/activity_gnots/nt/1473477781000",
+    "data": [
+      "U_asae",
+      "H_X-Requested-With",
+      "U_rfn",
+      "H_Upgrade-Insecure-Requests",
+      "U_rfnc"
+    ]
+  },
+  {
+    "app": "com.tencent.mm",
+    "version": "780",
+    "host": "caminorshort.weixin.qq.com",
+    "path": "/cgi-bin/micromsg-bin/newreportkvcomm",
+    "data": [
+      "PrivacyProxy-Request-Body"
+    ]
+  },
+  {
+    "app": "com.divum.MoneyControl",
+    "version": "90",
+    "host": "tpc.googlesyndication.com",
+    "path": "/pagead/gadgets/suggestion_autolayout_for_awx/suggestion_autolayout_call_extension_standard.js",
+    "data": [
+      "H_X-Requested-With"
+    ]
+  },
+  {
+    "app": "com.gsamlabs.bbm",
+    "version": "1903300",
+    "host": "haggler-mopub504-us-e-ec2.liftoff.io",
+    "path": "/mopub/win_notice",
+    "data": [
+      "U_source_app_store_id",
+      "U_auction_price",
+      "U_creative_id",
+      "U_device_id_sha1",
+      "U_channel_id",
+      "H_X-Requested-With",
+      "U_ad_group_id",
+      "U_auction_id",
+      "U_bid_ts"
+    ]
+  },
+  {
+    "app": "com.jb.zcamera",
+    "version": "100",
+    "host": "conf.api.hk.goforandroid.com",
+    "path": "/api/v2/configurations",
+    "data": [
+      "U_product_id",
+      "U_client_eyJsYW5nIjoiZW4iLCJjb3VudHJ5IjoiVVMiLCJjaGFubmVsIjoiMTAxIiwiY3ZlcnNpb25fbmFtZSI6IjIuMzgiLCJjdmVyc2lvbl9udW1iZXIiOjEwMH0",
+      "U_config_names"
+    ]
+  },
+  {
+    "app": "com.pandora.android",
+    "version": "76103",
+    "host": "www.pandora.com",
+    "path": "/mobile/still_listening.vm",
+    "data": [
+      "U_applicationVersion"
+    ]
+  },
+  {
+    "app": "com.google.android.location",
+    "version": "1110",
+    "host": "www.googleapis.com",
+    "path": "/searchintents/v1/icing/context",
+    "data": [
+      "H_X-Goog-Spatula_CjYKFmNvbS5nb29nbGUuYW5kcm9pZC5nbXMaHE9KR0tSVDBIR1pOVStMR2E4RjdHVml6dFY0Zz0SIBPkoX9Nt344DIxb64X5HkwWh9M8t66wGJPwVYunimuxGP2Lhe2r3JTmNyC72bLJk46zqU0"
+    ]
+  },
+  {
+    "app": "com.mico",
+    "version": "110202",
+    "host": "api.meetsmiles.com",
+    "path": "/api/location/user/locate",
+    "data": [
+      "B_longitude",
+      "H_version",
+      "H_timezone",
+      "H_language",
+      "H_md5",
+      "H_sign",
+      "H_locale",
+      "H_uid",
+      "B_source",
+      "B_latitude",
+      "H_did",
+      "H_os",
+      "B_nonce",
+      "H_encryption"
+    ]
+  },
+  {
+    "app": "com.instagram.android",
+    "version": "38802287",
+    "host": "i.instagram.com",
+    "path": "/api/v1/feed/user/1476857291/",
+    "data": [
+      "H_X-IG-Connection-Type",
+      "H_X-IG-Capabilities_3R4"
+    ]
+  },
+  {
+    "app": "com.amazon.mShop.android.shopping",
+    "version": "106243310",
+    "host": "ape-dyad-service-na.amazon.com",
+    "path": "/eas/v3/img",
+    "data": [
+      "U_sz",
+      "U_did",
+      "U_q",
+      "U_mktid",
+      "U_ueid",
+      "U_slot",
+      "U_rid",
+      "U_pt",
+      "U_bn",
+      "U_sid",
+      "U_bc"
+    ]
+  },
+  {
+    "app": "org.zwanoo.android.speedtest",
+    "version": "16198",
+    "host": "d.appsdt.com",
+    "path": "/sdkdwnldbeacon.html",
+    "data": [
+      "H_X-Requested-With",
+      "H_Upgrade-Insecure-Requests"
+    ]
+  },
+  {
+    "app": "com.google.android.gms",
+    "version": "9683440",
+    "host": "www.googleapis.com",
+    "path": "/userlocation/v1/settings/-1829193585",
+    "data": [
+      "H_X-Goog-Spatula_CjYKFmNvbS5nb29nbGUuYW5kcm9pZC5nbXMaHE9KR0tSVDBIR1pOVStMR2E4RjdHVml6dFY0Zz0SIA0ge30R/akCcu38nwru+XoeOoZSg260tWTIjLi64esGGLLmlZmGkZr3OiDtpKOF2L/Pnho",
+      "U_deviceRestriction",
+      "U_osLevel",
+      "U_platform",
+      "U_nlpVersion",
+      "U_devicePrettyName",
+      "U_gmsVersion"
+    ]
+  },
+  {
+    "app": "com.google.android.apps.docs",
+    "version": "63283434",
+    "host": "ssl.gstatic.com",
+    "path": "/docs/android/drive/client_flags",
+    "data": [
+      "U_1473778161508"
+    ]
+  },
+  {
+    "app": "org.zwanoo.android.speedtest",
+    "version": "15734",
+    "host": "www.google-analytics.com",
+    "path": "/__utm.g\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000if",
+    "data": [
+      "U_utmhid",
+      "U_utmac",
+      "U_utmcs",
+      "U_utmwv",
+      "U_utmsr",
+      "U_utmt",
+      "U_utmht",
+      "U_utmul",
+      "U_utmqt",
+      "U_utmcc___utma",
+      "U_utmn",
+      "U_utme"
+    ]
+  },
+  {
+    "app": "com.dictionary",
+    "version": "16",
+    "host": "app.dictionary.com",
+    "path": "/mobiledash",
+    "data": [
+      "U_spots",
+      "U_appId",
+      "U_sessCounters",
+      "U_deviceModel",
+      "U_session",
+      "U_browserId"
+    ]
+  },
+  {
+    "app": "com.instagram.android",
+    "version": "42539553",
+    "host": "i.instagram.com",
+    "path": "/api/v1/feed/reels_tray/",
+    "data": [
+      "H_X-IG-Capabilities_3Ro",
+      "H_X-IG-Connection-Type"
+    ]
+  },
+  {
+    "app": "org.zwanoo.android.speedtest",
+    "version": "16198",
+    "host": "ookla01.citynet.net",
+    "path": "/speedtest/latency.txt",
+    "data": [
+      "U_x"
+    ]
+  },
+  {
+    "app": "com.android.providers.downloads",
+    "version": "18",
+    "host": "android.clients.google.com",
+    "path": "/market/download/Download",
+    "data": [
+      "U_ch",
+      "U_packageName",
+      "U_token",
+      "U_ssl",
+      "U_versionCode",
+      "U_downloadId"
+    ]
+  },
+  {
+    "app": "com.android.vending",
+    "version": "80691500",
+    "host": "",
+    "path": "/fdfe/log",
+    "data": [
+      "H_X-DFE-Cookie",
+      "H_X-DFE-Content-Filters",
+      "H_X-DFE-Device-Checkin-Consistency-Token",
+      "H_X-DFE-Encoded-Targets",
+      "H_X-DFE-MCCMNC",
+      "H_X-DFE-Client-Id",
+      "H_X-DFE-Device-Id",
+      "H_X-DFE-Request-Params_timeoutMs",
+      "H_X-DFE-Network-Type"
+    ]
+  },
+  {
+    "app": "com.twitter.android",
+    "version": "6110017",
+    "host": "settings.crashlytics.com",
+    "path": "/spi/v2/platforms/android/apps/com.twitter.android/settings",
+    "data": [
+      "H_X-CRASHLYTICS-DEVICE-MODEL",
+      "H_X-CRASHLYTICS-API-CLIENT-TYPE",
+      "H_X-CRASHLYTICS-DEVELOPER-TOKEN",
+      "H_X-CRASHLYTICS-OS-BUILD-VERSION",
+      "U_instance",
+      "H_X-CRASHLYTICS-ADVERTISING-TOKEN",
+      "H_X-CRASHLYTICS-API-KEY",
+      "H_X-CRASHLYTICS-ANDROID-ID",
+      "U_build_version",
+      "U_source",
+      "H_X-CRASHLYTICS-OS-DISPLAY-VERSION",
+      "U_icon_hash",
+      "H_X-CRASHLYTICS-API-CLIENT-VERSION",
+      "H_X-CRASHLYTICS-INSTALLATION-ID",
+      "U_display_version"
+    ]
+  },
+  {
+    "app": "com.instagram.android",
+    "version": "35795936",
+    "host": "i.instagram.com",
+    "path": "/api/v1/direct_v2/ranked_recipients/",
+    "data": [
+      "H_X-IG-Capabilities_3QI",
+      "H_X-IG-Connection-Type",
+      "U_show_threads"
+    ]
+  },
+  {
+    "app": "com.sand.airdroid",
+    "version": "20159",
+    "host": "stat3.airdroid.com",
+    "path": "/phone/open/",
+    "data": [
+      "U_ver",
+      "U_q"
+    ]
+  },
+  {
+    "app": "com.zentertain.freemusic",
+    "version": "53",
+    "host": "api.soundcloud.com",
+    "path": "/tracks/262375023/stream",
+    "data": [
+      "U_client_id"
+    ]
+  },
+  {
+    "app": "flipboard.app",
+    "version": "2920",
+    "host": "fbprod.flipboard.com",
+    "path": "/v1/flipboard/userInfo/1814693106",
+    "data": [
+      "U_lang",
+      "U_device",
+      "U_locale_cg",
+      "U_states",
+      "U_locale",
+      "U_userid",
+      "U_screensize",
+      "U_revisions",
+      "U_tuuid",
+      "U_udid",
+      "U_jobid",
+      "U_ver"
+    ]
+  },
+  {
+    "app": "com.hipchat",
+    "version": "3014007",
+    "host": "d301sr5gafysq2.cloudfront.net",
+    "path": "/152f0a4289bc/img/bitbucket_avatar/192/bitbucket.png",
+    "data": [
+      "H_X-NewRelic-ID_XQQPWFJVGwoBXFJXBAc"
+    ]
+  },
+  {
+    "app": "unknown",
+    "version": "-1",
+    "host": "push.airdroid.com",
+    "path": "/msg/get",
+    "data": [
+      "U_token",
+      "U_m",
+      "U_ver",
+      "U_k"
+    ]
+  },
+  {
+    "app": "com.google.android.backuptransport",
+    "version": "22",
+    "host": "accounts.google.com",
+    "path": "/ServiceLogin",
+    "data": [
+      "U_followup",
+      "U_continue",
+      "U_passive"
+    ]
+  },
+  {
+    "app": "com.outfit7.mytalkingtomfree",
+    "version": "1200",
+    "host": "a.applovin.com",
+    "path": "/nad",
+    "data": [
+      "U_tz_offset",
+      "U_etfw",
+      "U_preloading",
+      "U_sdk_version",
+      "U_orientation_lock",
+      "U_wvvc",
+      "U_ia",
+      "U_revision",
+      "U_accept",
+      "U_v2",
+      "U_size",
+      "U_country_code",
+      "U_model",
+      "U_dx",
+      "U_format",
+      "U_network",
+      "U_slot_count",
+      "U_si",
+      "U_app_version",
+      "U_api_did",
+      "U_brand",
+      "U_sdk_key",
+      "U_carrier",
+      "U_platform",
+      "U_li",
+      "U_v1",
+      "U_dnt",
+      "U_locale",
+      "U_ntfw",
+      "U_os",
+      "U_dy",
+      "U_vz",
+      "U_idfa"
+    ]
+  },
+  {
+    "app": "com.google.android.gms",
+    "version": "9683440",
+    "host": "www.googleapis.com",
+    "path": "/userlocation/v1/reports/-1829193585",
+    "data": [
+      "U_deviceRestriction",
+      "U_osLevel",
+      "U_platform",
+      "U_nlpVersion",
+      "H_X-Goog-Spatula",
+      "U_devicePrettyName",
+      "U_gmsVersion"
+    ]
+  },
+  {
+    "app": "com.particlenews.newsbreak",
+    "version": "118",
+    "host": "api.particlenews.com",
+    "path": "/Website/contents/content",
+    "data": [
+      "U_distribution",
+      "U_cv",
+      "U_version",
+      "U_docid",
+      "U_platform",
+      "U_bottom_channels",
+      "U_related_docs",
+      "U_net",
+      "U_appid"
+    ]
+  },
+  {
+    "app": "com.nis.app",
+    "version": "416",
+    "host": "assets.inshorts.com",
+    "path": "/news/in/en/467d370e-6980-4d21-8150-090aeec2e56f-1",
+    "data": [
+      "H_X-DEVICE-ID",
+      "H_X-ADMIN-AREA",
+      "H_X-LATITUDE",
+      "H_X-PINCODE",
+      "H_X-APP-VERSION",
+      "H_X-LOCALITY",
+      "H_X-OS-TYPE",
+      "H_X-LONGITUDE"
+    ]
+  },
+  {
+    "app": "com.dianxinos.dxbs",
+    "version": "4025",
+    "host": "graph.facebook.com",
+    "path": "/network_ads_common/",
+    "data": [
+      "B_SCREEN_HEIGHT",
+      "B_MAKE",
+      "B_SDK_CAPABILITY",
+      "B_IDFA_FLAG",
+      "B_SCREEN_WIDTH",
+      "B_NUM_ADS_REQUESTED",
+      "B_OS",
+      "B_BUNDLE",
+      "B_SDK_VERSION",
+      "B_MODEL",
+      "B_PLACEMENT_ID",
+      "B_ID_SOURCE",
+      "B_LOCALE",
+      "B_IDFA",
+      "B_OSVERS",
+      "B_SDK",
+      "B_ADAPTERS",
+      "B_NETWORK_TYPE",
+      "B_TEMPLATE_ID",
+      "B_ATTRIBUTION_ID",
+      "B_INSTALLER",
+      "B_APPVERS",
+      "B_CARRIER",
+      "B_PLACEMENT_TYPE",
+      "B_COPPA",
+      "B_DENSITY",
+      "B_APPNAME",
+      "B_APPBUILD",
+      "B_CLIENT_EVENTS",
+      "B_REQUEST_TYPE"
+    ]
+  },
+  {
+    "app": "com.amazon.mShop.android.shopping",
+    "version": "106243310",
+    "host": "www.amazon.com",
+    "path": "/gp/gw/ajax/mshop.html",
+    "data": [
+      "H_X-Requested-With",
+      "H_Upgrade-Insecure-Requests",
+      "U_tag"
+    ]
+  },
+  {
+    "app": "com.google.android.youtube",
+    "version": "112953640",
+    "host": "redirector.googlevideo.com",
+    "path": "/initplayback",
+    "data": [
+      "U_id",
+      "U_rn",
+      "U_owc",
+      "U_pai",
+      "U_pvi",
+      "U_source",
+      "U_itag"
+    ]
+  },
+  {
+    "app": "com.tinder",
+    "version": "1758",
+    "host": "api.branch.io",
+    "path": "/v1/open",
+    "data": [
+      "B_wifi",
+      "B_brand",
+      "B_os_version",
+      "B_is_hardware_id_real",
+      "B_screen_dpi",
+      "B_is_referrable",
+      "B_device_fingerprint_id",
+      "B_facebook_app_link_checked",
+      "B_model",
+      "B_sdk",
+      "B_identity_id",
+      "B_os",
+      "B_instrumentation_v1/open-qwt",
+      "B_screen_width",
+      "B_hardware_id",
+      "B_lat_val",
+      "B_retryNumber",
+      "B_branch_key",
+      "B_google_advertising_id",
+      "B_debug",
+      "B_screen_height",
+      "B_external_intent_extra",
+      "B_update",
+      "B_app_version"
+    ]
+  },
+  {
+    "app": "com.erigolabs.hog",
+    "version": "4",
+    "host": "settings.crashlytics.com",
+    "path": "/spi/v2/platforms/android/apps/com.erigolabs.hog/settings",
+    "data": [
+      "H_X-CRASHLYTICS-DEVICE-MODEL",
+      "H_X-CRASHLYTICS-API-CLIENT-TYPE",
+      "H_X-CRASHLYTICS-DEVELOPER-TOKEN",
+      "H_X-CRASHLYTICS-OS-BUILD-VERSION",
+      "U_instance",
+      "H_X-CRASHLYTICS-ADVERTISING-TOKEN",
+      "H_X-CRASHLYTICS-API-KEY",
+      "H_X-CRASHLYTICS-ANDROID-ID",
+      "U_build_version",
+      "U_source",
+      "H_X-CRASHLYTICS-OS-DISPLAY-VERSION",
+      "U_icon_hash",
+      "H_X-CRASHLYTICS-API-CLIENT-VERSION",
+      "U_display_version",
+      "H_X-CRASHLYTICS-INSTALLATION-ID"
+    ]
+  },
+  {
+    "app": "unknown",
+    "version": "-1",
+    "host": "maps.googleapis.com",
+    "path": "/maps/api/elevation/xml",
+    "data": [
+      "U_sensor",
+      "U_locations"
+    ]
+  },
+  {
+    "app": "bbc.mobile.news.ww",
+    "version": "106465",
+    "host": "servedby.flashtalking.com",
+    "path": "/imp/8/64212;1930170;201;js;NetminingUS;P6QGL5AU1TPI006AudienceNETMININGCOMDisplayCCD300x250BTRunofSiteBehavioralP21x1ClickandViewPointRollNA/",
+    "data": [
+      "U_ftscw",
+      "U_ft_custom",
+      "U_ft_referrer",
+      "U_ftx",
+      "U_ft_domain",
+      "U_ft_ifb",
+      "U_cachebuster",
+      "U_fty",
+      "U_ftOBA",
+      "H_X-Requested-With",
+      "U_ftadz"
+    ]
+  },
+  {
+    "app": "goldenshorestechnologies.brightestflashlight.free",
+    "version": "28",
+    "host": "ads.mp.mydas.mobi",
+    "path": "/getAd.php5",
+    "data": [
+      "U_pkid",
+      "U_do",
+      "U_pip",
+      "U_mnc",
+      "U_dv",
+      "U_video",
+      "U_accelerometer",
+      "U_olock",
+      "U_wpx",
+      "U_hsht",
+      "U_ua",
+      "U_space",
+      "U_mcc",
+      "U_sdkapid",
+      "U_hpx",
+      "U_mmdid",
+      "U_language",
+      "U_country",
+      "U_appsids",
+      "U_sdkversion",
+      "U_ar",
+      "U_plugged",
+      "U_density",
+      "U_loc",
+      "U_dm",
+      "U_reqtype",
+      "U_pknm",
+      "U_conn",
+      "U_mmisdk",
+      "U_cachedvideo",
+      "U_hswd",
+      "U_bl",
+      "U_at"
+    ]
+  },
+  {
+    "app": "org.zwanoo.android.speedtest",
+    "version": "16198",
+    "host": "i.l.inmobicdn.net",
+    "path": "/sdk/sdk/configs/400/commons.json",
+    "data": [
+      "U_mk-siteid",
+      "U_u-s-id",
+      "U_u-appver",
+      "U_u-appbid",
+      "U_u-id-adt",
+      "U_u-id-map",
+      "U_mk-rel-version",
+      "U_u-appDNM",
+      "U_tz",
+      "U_h-user-agent",
+      "U_u-id-key",
+      "U_mk-version",
+      "U_ts",
+      "U_u-key-ver"
+    ]
+  },
+  {
+    "app": "com.android.chrome",
+    "version": "270408100",
+    "host": "www.andysbuses.com",
+    "path": "/default.aspx",
+    "data": [
+      "H_Upgrade-Insecure-Requests"
+    ]
+  },
+  {
+    "app": "com.google.android.calendar",
+    "version": "2015244432",
+    "host": "www.googleapis.com",
+    "path": "/calendar/v3internal/calendars/gaurav.srivastava7@gmail.com/events",
+    "data": [
+      "U_updatedMin",
+      "U_maxResults",
+      "U_supportsAllDayReminders",
+      "U_maxAttendees",
+      "U_timeMax"
+    ]
+  },
+  {
+    "app": "com.android.providers.drm",
+    "version": "18",
+    "host": "r14---sn-p5qlsnss.gvt1.com",
+    "path": "/market/GetBinary/GetBinary/com.gsamlabs.bbm/703300/apk_gz",
+    "data": [
+      "U_ip",
+      "U_pl",
+      "U_ms",
+      "U_mt",
+      "U_mv",
+      "U_ipbits",
+      "U_cms_redirect",
+      "U_mn",
+      "U_mm",
+      "U_req_id",
+      "U_key",
+      "U_signature",
+      "U_cp",
+      "U_expire",
+      "U_redirect_counter",
+      "U_sparams",
+      "U_nh"
+    ]
+  },
+  {
+    "app": "com.pinterest",
+    "version": "60201",
+    "host": "api.pinterest.com",
+    "path": "/v3/gatekeeper/activate/",
+    "data": [
+      "B_experiment_data_key",
+      "H_X-Pinterest-AppState",
+      "H_X-Pinterest-Device",
+      "H_X-Pinterest-Device-Class",
+      "H_X-Pinterest-InstallId",
+      "H_X-Pinterest-App-Type",
+      "H_X-Pinterest-Device-HardwareId"
+    ]
+  },
+  {
+    "app": "com.android.vending",
+    "version": "80671300",
+    "host": "",
+    "path": "/fdfe/selfUpdate",
+    "data": [
+      "H_X-DFE-Other-Targets",
+      "H_X-DFE-Device-Config-Token",
+      "H_X-DFE-Content-Filters"
+    ]
+  },
+  {
+    "app": "bbc.mobile.news.ww",
+    "version": "106465",
+    "host": "walter-resolver-cdn.api.bbci.co.uk",
+    "path": "/resolve",
+    "data": [
+      "U_uri"
+    ]
+  },
+  {
+    "app": "com.android.providers.media",
+    "version": "800",
+    "host": "r2---sn-3pocxg-njxe.gvt1.com",
+    "path": "/market/GetBinary/GetBinary/b/1/AF3DWBexsd0viV96e5U9-SkM_V5zryDLKeDmV6ZjiP92RaDHe5na59tkPbLgx3RWzvkCKCPnIzjixRRrPvF5b3jLZeZVxk8h0vfMyvvVm9ys5V6NLdniV-o\u003d",
+    "data": [
+      "U_sparams",
+      "U_key",
+      "U_mm",
+      "U_pl",
+      "U_cp",
+      "U_mn",
+      "U_ip",
+      "U_mt",
+      "U_ms",
+      "U_mv",
+      "U_signature",
+      "U_ipbits",
+      "U_expire"
+    ]
+  },
+  {
+    "app": "com.android.vending",
+    "version": "80691500",
+    "host": "android.clients.google.com",
+    "path": "/fdfe/api/userProfile",
+    "data": [
+      "H_X-DFE-Logging-Id",
+      "H_X-DFE-Request-Params_timeoutMs",
+      "H_X-DFE-MCCMNC",
+      "H_X-DFE-Client-Id",
+      "H_X-DFE-Device-Id"
+    ]
+  },
+  {
+    "app": "com.instagram.android",
+    "version": "38802287",
+    "host": "i.instagram.com",
+    "path": "/api/v1/push/register/",
+    "data": [
+      "B_is_main_push_channel",
+      "B_device_token_v",
+      "B_device_token_k",
+      "B_phone_id",
+      "B_device_token_t",
+      "B__csrftoken",
+      "B_device_type",
+      "H_X-IG-Capabilities_3R4",
+      "B__uuid",
+      "B_guid",
+      "H_X-IG-Connection-Type",
+      "B_users"
+    ]
+  },
+  {
+    "app": "com.gau.go.launcherex.gowidget.weatherwidget",
+    "version": "205",
+    "host": "goweatherex.3g.cn",
+    "path": "/goweatherex/weather/getWeather",
+    "data": [
+      "U_lang",
+      "U_w",
+      "U_chan",
+      "U_sys",
+      "U_refleshTime",
+      "U_sce",
+      "U_timestamp",
+      "U_h",
+      "U_ps",
+      "U_cliVersion",
+      "U_payment",
+      "U_cliId"
+    ]
+  },
+  {
+    "app": "com.mico",
+    "version": "110202",
+    "host": "api.meetsmiles.com",
+    "path": "/api/echo",
+    "data": [
+      "U_cv",
+      "H_version",
+      "U_step",
+      "H_language",
+      "H_timezone",
+      "H_md5",
+      "U_ch",
+      "U_ch3",
+      "U_nonce",
+      "H_uid",
+      "H_locale",
+      "H_sign",
+      "U_did",
+      "U_ch2",
+      "H_did",
+      "H_os",
+      "U_gpid",
+      "H_encryption",
+      "U_type",
+      "U_mac",
+      "U_uid",
+      "U_attr"
+    ]
+  },
+  {
+    "app": "com.tinder",
+    "version": "1811",
+    "host": "api.gotinder.com",
+    "path": "/user/recs",
+    "data": [
+      "H_app-version",
+      "H_X-Auth-Token",
+      "H_os-version",
+      "H_platform",
+      "U_locale"
+    ]
+  },
+  {
+    "app": "com.google.android.gms",
+    "version": "9452440",
+    "host": "android.clients.google.com",
+    "path": "/auth",
+    "data": [
+      "H_app",
+      "H_device"
+    ]
+  },
+  {
+    "app": "com.particlenews.newsbreak",
+    "version": "118",
+    "host": "external.xx.fbcdn.net",
+    "path": "/safe_image.php",
+    "data": [
+      "U_w",
+      "U_ext",
+      "U_sy",
+      "U_sw",
+      "U_h",
+      "U_url_https://www.facebook.com/ads/image/?d",
+      "U_sx",
+      "U_d",
+      "U_sh",
+      "U_cfs"
+    ]
+  },
+  {
+    "app": "com.instagram.android",
+    "version": "39471633",
+    "host": "telegraph-ash.instagram.com",
+    "path": "/rt",
+    "data": [
+      "H_Sec-WebSocket-Key_NzRNVl8wEvnaQj5l80be3A_",
+      "H_Sec-WebSocket-Version"
+    ]
+  },
+  {
+    "app": "com.android.vending",
+    "version": "80691500",
+    "host": "",
+    "path": "/fdfe/search",
+    "data": [
+      "H_X-DFE-Cookie",
+      "H_X-DFE-Content-Filters",
+      "H_X-DFE-Encoded-Targets",
+      "U_q",
+      "H_X-DFE-MCCMNC",
+      "H_X-DFE-Client-Id",
+      "H_X-DFE-Device-Id",
+      "H_X-DFE-Request-Params_timeoutMs",
+      "U_c",
+      "H_X-DFE-Network-Type"
+    ]
+  },
+  {
+    "app": "com.gau.go.launcherex.gowidget.weatherwidget",
+    "version": "210",
+    "host": "stats.appsflyer.com",
+    "path": "/stats",
+    "data": [
+      "B_launch_counter",
+      "B_deviceFingerPrintId",
+      "B_uid",
+      "B_statType",
+      "B_devkey",
+      "B_gcd_conversion_data_timing",
+      "B_platform",
+      "B_app_id",
+      "B_time_in_app"
+    ]
+  },
+  {
+    "app": "com.kingouser.com",
+    "version": "214",
+    "host": "uts.kingoapp.com",
+    "path": "/uts/install-channel-report",
+    "data": [
+      "U_lang",
+      "U_lang-str",
+      "U_client-version"
+    ]
+  },
+  {
+    "app": "org.zwanoo.android.speedtest",
+    "version": "16198",
+    "host": "www.speedtest.net",
+    "path": "/mobile/js/vendor/modernizr-2.6.1.min.js",
+    "data": [
+      "H_X-Requested-With",
+      "U_version"
+    ]
+  },
+  {
+    "app": "com.ubercab",
+    "version": "31302",
+    "host": "settings.crashlytics.com",
+    "path": "/spi/v2/platforms/android/apps/com.ubercab/settings",
+    "data": [
+      "U_instance",
+      "H_X-CRASHLYTICS-API-KEY",
+      "U_build_version",
+      "U_source",
+      "H_X-CRASHLYTICS-API-CLIENT-TYPE",
+      "H_X-CRASHLYTICS-D",
+      "U_icon_hash",
+      "H_X-CRASHLYTICS-API-CLIENT-VERSION",
+      "H_X-CRASHLYTICS-DEVELOPER-TOKEN",
+      "U_display_version"
+    ]
+  },
+  {
+    "app": "com.yelp.android",
+    "version": "19008603",
+    "host": "m.yelp.com",
+    "path": "/spice",
+    "data": [
+      "U_pagevis",
+      "U_gablock",
+      "U_r",
+      "H_X-Requested-With",
+      "U_log_ad_spice"
+    ]
+  },
+  {
+    "app": "com.pinterest",
+    "version": "60101",
+    "host": "api.pinterest.com",
+    "path": "/v3/login/",
+    "data": [
+      "H_X-Pinterest-AppState",
+      "H_X-Pinterest-Device",
+      "H_X-Pinterest-App-Type",
+      "U_client_id",
+      "U_oauth_signature",
+      "U_timestamp",
+      "B_password",
+      "B_username_or_email",
+      "H_X-Pinterest-Device-Class",
+      "H_X-Pinterest-InstallId",
+      "H_X-Pinterest-Device-HardwareId"
+    ]
+  },
+  {
+    "app": "org.zwanoo.android.speedtest",
+    "version": "16198",
+    "host": "www.speedtest.net",
+    "path": "/mobile/android/about",
+    "data": [
+      "U_generalizedSize",
+      "U_network",
+      "U_orientation",
+      "U_generalizedDpi",
+      "U_ydpi",
+      "U_lon",
+      "U_carrier",
+      "U_lat",
+      "U_xpixels",
+      "U_device_id",
+      "U_osver",
+      "U_ypixels",
+      "U_xdpi",
+      "U_inapp",
+      "U_model",
+      "H_X-Requested-With",
+      "U_appver",
+      "H_Upgrade-Insecure-Requests"
+    ]
+  },
+  {
+    "app": "com.joelapenna.foursquared",
+    "version": "2016091617",
+    "host": "api.foursquare.com",
+    "path": "/v2/search/recommendations",
+    "data": [
+      "U_m",
+      "H_X-Fs-Consumer",
+      "U_ll",
+      "U_offset",
+      "U_v",
+      "U_wsid",
+      "U_initialOffset",
+      "U_userll",
+      "U_oauth_token",
+      "U_intent",
+      "U_snippetCharacterLimit",
+      "U_limit",
+      "U_csid"
+    ]
+  },
+  {
+    "app": "com.tinder",
+    "version": "1877",
+    "host": "i.scdn.co",
+    "path": "/image/8b47495ce0c4a341f7196f70bcf4361e6257c1a0",
+    "data": [
+      "H_X-Global-Ping"
+    ]
+  },
+  {
+    "app": "com.jb.zcamera",
+    "version": "97",
+    "host": "newstoredata.goforandroid.com",
+    "path": "/newstore/common",
+    "data": [
+      "B_data_reqs_pageid",
+      "B_data_phead_cdays",
+      "B_data_phead_imsi",
+      "B_data_reqs_moduleId",
+      "B_handle",
+      "B_data_phead_entranceId",
+      "B_data_phead_cversionname",
+      "B_data_phead_sdkabversion",
+      "B_data_phead_hasmarket",
+      "B_shandle",
+      "B_data_phead_gadid",
+      "B_data_phead_dataChannel",
+      "B_data_phead_model",
+      "B_data_phead_requesttime",
+      "B_data_reqs_showquantity",
+      "B_data_phead_buychannel",
+      "B_data_phead_net",
+      "B_pfunid",
+      "B_data_phead_local",
+      "B_data_phead_uid",
+      "B_data_phead_dpi",
+      "B_data_phead_lang",
+      "B_data_phead_pversion",
+      "B_data_phead_channel",
+      "B_data_phead_goid",
+      "B_data_phead_sys",
+      "U_rd",
+      "B_data_phead_aid",
+      "B_data_tags",
+      "U_funid",
+      "B_data_phead_cversion",
+      "B_data_phead_sdk",
+      "B_data_phead_cid",
+      "B_data_filterpkgnames"
+    ]
+  },
+  {
+    "app": "com.yelp.android",
+    "version": "19008203",
+    "host": "app.adjust.com",
+    "path": "/attribution",
+    "data": [
+      "U_created_at",
+      "U_needs_response_details",
+      "H_Client-SDK",
+      "U_app_token",
+      "U_sent_at",
+      "U_event_buffering_enabled",
+      "U_environment",
+      "U_gps_adid",
+      "U_tracking_enabled"
+    ]
+  },
+  {
+    "app": "com.instagram.android",
+    "version": "42539553",
+    "host": "i.instagram.com",
+    "path": "/api/v1/feed/timeline/",
+    "data": [
+      "H_X-IG-INSTALLED-APPS_eyIxIjowLCIyIjowfQ_",
+      "U_battery_level",
+      "U_is_prefetch",
+      "H_X-IG-Capabilities_3Ro",
+      "H_X-FB",
+      "U_is_charging",
+      "U_latest_story_pk",
+      "U_seen_posts",
+      "H_X-DEVICE-ID",
+      "U_phone_id",
+      "U_unseen_posts",
+      "U_is_pull_to_refresh",
+      "U_timezone_offset",
+      "H_X-IG-Connection-Type"
+    ]
+  },
+  {
+    "app": "com.yelp.android",
+    "version": "19008503",
+    "host": "auto-api.yelp.com",
+    "path": "/preferences",
+    "data": [
+      "H_Cookie2_$Version",
+      "U_lang",
+      "U_cc",
+      "U_signature__zbLSZEPq10LzKhRAKCuU8B8iac0",
+      "U_time",
+      "H_x-screen-scale",
+      "U_app_version",
+      "U_nonce_4CRorg_",
+      "U_device_type",
+      "U_ywsid",
+      "U_efs_OQhd4CyyH557J2lykd0ZmJdub1E3XrKu0Ne1+2rUs8wkmzTm/qlTZV9BK+WMHRALd03MjLdGFpZxGrBpE/YDrDjdSAR71q1hOMOPhDOLqtY",
+      "U_signature__qm8nV/eUUEazAd1r5IZ27Vfke0k",
+      "U_efs_t5KpRxh1ttALuWaPORHcWTUBTb9lD7XEH4WIOKwCSkLdmbCl/z5s6AxzKqEDJCZU1jju+KtPmIXarK4dCI3B1f0FHoDj4P8zZXZBQrRiNkU",
+      "U_nonce_I2YD0w_"
+    ]
+  },
+  {
+    "app": "com.dictionary",
+    "version": "16",
+    "host": "m.hotword.dictionary.com",
+    "path": "/feed",
+    "data": [
+      "U_device_id",
+      "U_app_id",
+      "U_deviceid",
+      "U_platform"
+    ]
+  },
+  {
+    "app": "org.zwanoo.android.speedtest",
+    "version": "15734",
+    "host": "www.google-analytics.com",
+    "path": "/__utm.gif",
+    "data": [
+      "U_utmhid",
+      "U_utmac",
+      "U_utmcs",
+      "U_utmwv",
+      "U_utmsr",
+      "U_utmht",
+      "U_utmp",
+      "U_utmul",
+      "U_utmqt",
+      "U_utmcc___utma",
+      "U_utmn",
+      "U_utmt",
+      "U_utme"
+    ]
+  },
+  {
+    "app": "com.tinder",
+    "version": "1877",
+    "host": "graph.facebook.com",
+    "path": "/v2.6/464891386855067",
+    "data": [
+      "U_fields",
+      "U_format",
+      "U_sdk"
+    ]
+  },
+  {
+    "app": "flipboard.app",
+    "version": "2939",
+    "host": "graph.facebook.com",
+    "path": "/v2.6/105130332854716",
+    "data": [
+      "U_fields",
+      "U_sdk",
+      "U_format"
+    ]
+  },
+  {
+    "app": "com.rechild.advancedtaskkiller",
+    "version": "10213",
+    "host": "googleads.g.doubleclick.net",
+    "path": "/pagead/gen_204",
+    "data": [
+      "U_gqid",
+      "U_id",
+      "U_fg",
+      "U_qqid"
+    ]
+  },
+  {
+    "app": "unknown",
+    "version": "-1",
+    "host": "portal.fb.com",
+    "path": "/mobile/status.php",
+    "data": [
+      "H_X-FB-Background-State",
+      "H_x-fb-http-engine",
+      "H_x-fb-net-hni",
+      "H_x-fb-sim-hni"
+    ]
+  },
+  {
+    "app": "com.android.vending",
+    "version": "80671300",
+    "host": "",
+    "path": "/fdfe/toc",
+    "data": [
+      "H_X-DFE-Other-Targets"
+    ]
+  },
+  {
+    "app": "com.android.vending",
+    "version": "80682400",
+    "host": "",
+    "path": "/fdfe/homeV2",
+    "data": [
+      "U_c",
+      "H_X-DFE-Other-Targets"
+    ]
+  },
+  {
+    "app": "com.tinder",
+    "version": "1877",
+    "host": "api.gotinder.com",
+    "path": "/location/popular",
+    "data": [
+      "H_app-version",
+      "H_X-Auth-Token",
+      "H_os-version",
+      "U_locale",
+      "H_platform"
+    ]
+  },
+  {
+    "app": "com.google.android.gms",
+    "version": "9452236",
+    "host": "play.googleapis.com",
+    "path": "/log",
+    "data": [
+      "H_Transfer-Encoding"
+    ]
+  },
+  {
+    "app": "com.facebook.orca",
+    "version": "37036629",
+    "host": "graph.facebook.com",
+    "path": "/mobileconfig",
+    "data": [
+      "H_X-FB-Background-State",
+      "H_x-fb-net-hni",
+      "H_x-fb-sim-hni",
+      "H_x-fb-net-sid",
+      "B_\u001f�\b\u0000\u0000\u0000\u0000\u0000\u0000\u0003���n�0\f\u0006�I�\u0002�\u0007�.z�n�aP\u0012�\u0018u�-n�ׯ�\u0002)�\u000e�.(���Ѥ��W�̺_���\u000eQ���mz�m��Q/��W�W��,K��\u003c\u001d_�w��mG\u0007\u001e�G�\u0001w�c�_�E�,\u0003/��\u0011�Q8��`t�_t-�u",
+      "H_X-FB-Connection-Type"
+    ]
+  },
+  {
+    "app": "com.dictionary",
+    "version": "16",
+    "host": "click.dictionary.com",
+    "path": "/mobiletrack",
+    "data": [
+      "B_transmission",
+      "B_appVersion",
+      "B_deviceModel",
+      "B_sessionId",
+      "B_systemVersion",
+      "B_browserId",
+      "B_appId",
+      "B_e1-orientation",
+      "B_numEvents",
+      "B_e1-ts",
+      "B_e1-event",
+      "B_appName",
+      "B_e1-sessionCount",
+      "B_e1-pageviewCount",
+      "B_e1-pageName"
+    ]
+  },
+  {
+    "app": "com.kingoapp.battery",
+    "version": "146",
+    "host": "api.mobula.sdk.duapps.com",
+    "path": "/adunion/rtb/getInmobiAd",
+    "data": [
+      "U_aSize",
+      "U_vendor",
+      "U_siteId",
+      "U_pn",
+      "U_model",
+      "U_locale",
+      "U_ps",
+      "U_vn",
+      "U_sType",
+      "U_h",
+      "U_sdk",
+      "U_play",
+      "U_ua",
+      "U_res",
+      "U_sv",
+      "U_op",
+      "U_sid",
+      "U_svn",
+      "U_or",
+      "U_ls",
+      "U_dpi",
+      "U_pkg",
+      "U_aid",
+      "U_w",
+      "U_ntt",
+      "U_v"
+    ]
+  },
+  {
+    "app": "com.google.android.syncadapters.contacts",
+    "version": "18",
+    "host": "play.googleapis.com",
+    "path": "/log",
+    "data": [
+      "H_X-SERVER-TOKEN",
+      "H_Transfer-Encoding"
+    ]
+  },
+  {
+    "app": "com.hipchat",
+    "version": "3014007",
+    "host": "api.hipchat.com",
+    "path": "/v2/room/2981183/history/latest",
+    "data": [
+      "H_X-NewRelic-ID_XQQPWFJVGwoBXFJXBAc",
+      "U_not-before",
+      "U_max-results"
+    ]
+  },
+  {
+    "app": "com.android.vending",
+    "version": "80691500",
+    "host": "",
+    "path": "/fdfe/survey",
+    "data": [
+      "H_X-DFE-Cookie",
+      "H_X-DFE-Content-Filters",
+      "H_X-DFE-Encoded-Targets",
+      "H_X-DFE-MCCMNC",
+      "H_X-DFE-Client-Id",
+      "H_X-DFE-Device-Id",
+      "H_X-DFE-Request-Params_timeoutMs",
+      "H_X-DFE-Network-Type"
+    ]
+  },
+  {
+    "app": "com.android.providers.telephony",
+    "version": "18",
+    "host": "hub.samsungapps.com",
+    "path": "/mercury/product/appCheck.as",
+    "data": [
+      "U_openApi",
+      "U_csc",
+      "U_mnc",
+      "U_pd",
+      "U_appInfo",
+      "U_mcc",
+      "U_deviceId"
+    ]
+  },
+  {
+    "app": "com.google.android.partnersetup",
+    "version": "18",
+    "host": "clients1.google.com",
+    "path": "/tools/pso/ping",
+    "data": [
+      "U_rep",
+      "U_rlz",
+      "U_pid",
+      "U_id",
+      "U_hl",
+      "U_acap",
+      "U_brand",
+      "U_as"
+    ]
+  },
+  {
+    "app": "com.tencent.mm",
+    "version": "840",
+    "host": "support.weixin.qq.com",
+    "path": "/cgi-bin/mmsupport-bin/reportdevice",
+    "data": [
+      "U_lang",
+      "U_clientversion",
+      "U_platform",
+      "U_installtype",
+      "U_deviceid",
+      "U_channel"
+    ]
+  },
+  {
+    "app": "com.google.android.backuptransport",
+    "version": "24",
+    "host": "www.googleapis.com",
+    "path": "/placesandroid/v1/searchByChain",
+    "data": [
+      "U_key",
+      "H_X-Android-Package",
+      "H_X-Android-Cert"
+    ]
+  },
+  {
+    "app": "com.weather.Weather",
+    "version": "701000609",
+    "host": "api.weather.com",
+    "path": "/v2/turbo/vt1pollenobs;vt1pollenforecast;vt1pastpollen;vt1breathingindex;vt1dailyforecast;vt1alerts;vt1daypart;vt1flu;vt1pastflu;vt1sickWeatherColdFluSickScore;vt1sickWeatherMarkerCount;vt1hourlyforecast;vt1observation;vt1lightning;vt1wwir;vt1runweatherhourly;v2idxDriveCurrent;vt1precipitation",
+    "data": [
+      "U_language",
+      "U_geocode",
+      "U_apiKey",
+      "U_units",
+      "U_format",
+      "U_pollenStartDate",
+      "U_pollenDays"
+    ]
+  },
+  {
+    "app": "com.facebook.orca",
+    "version": "40018461",
+    "host": "portal.fb.com",
+    "path": "/mobile/status.php",
+    "data": [
+      "H_X-FB-Background-State",
+      "H_X-FB-HTTP-Engine",
+      "H_x-fb-http-engine"
+    ]
+  },
+  {
+    "app": "com.google.android.youtube",
+    "version": "112953640",
+    "host": "securepubads.g.doubleclick.net",
+    "path": "/pcs/view",
+    "data": [
+      "U_adurl",
+      "U_sai",
+      "U_sig",
+      "U_xai",
+      "U_urlfix"
+    ]
+  },
+  {
+    "app": "com.microsoft.office.onenote",
+    "version": "1801343619",
+    "host": "inst.platform.bing.com",
+    "path": "/api/log",
+    "data": [
+      "B_{\"STS\":1475097699954,\"AppID\":\"D70E3891D7FAEA4E1B2EEBA048E9E9252DA58AC7\",\"TZ\":\"-04:00\",\"E\":[{\"T\":\"Event.Custom\",\"N\":\"Event.RegisterSignal\",\"EvtId\":\"679f4623-7600-4231-a7ea-2840c2be058d\",\"TS\":1475097699954,\"D\":{\"BondV2BinaryString\":\"ygqpJDEzZGE2MjQ4LTBmZDgtNDkwNi04ZTE4LTljMWE2ODc5MjdhYsYGFckKFzIwMTYtMDktMjggMjE6MTU6NTkuNzc4yQ8FazJhcHDJEgZRdWFzYXLJFAUxLjEuNADKDwDKFOkAgDRNaWNyb3NvZnQuQXBwbGljYXRpb25zLlRlbGVtZXRyeS5JbnRlcmZhY2VzLlVzZXJJbmZvAckUBWVuLUdCyRkGLTA0OjAwAMoZ6QCANk1pY3Jvc29mdC5BcHBsaWNhdGlvbnMuVGVsZW1ldHJ5LkludGVyZmFjZXMuRGV2aWNlSW5mbwHJChBmOWM2Zjk4MDJlMDU3MDM0yRQHc2Ftc3VuZ8kZCFNNLUc5MzVG0CMEySgHQW5kcm9pZMksBTYuMC4xyTANRzkzNUZYWFUxQVBEMQDKHukAgDNNaWNyb3NvZnQuQXBwbGljYXRpb25zLlRlbGVtZXRyeS5JbnRlcmZhY2VzLkFwcEluZm8ByQokMTNDRjQ4RDUtNDc2OS00REM2LThDRjItNTNDMTY0QTdDRjJByRQOMTYuMC43MzAxLjEwMTMAzSgJCgE3TWljcm9zb2Z0LkFwcGxpY2F0aW9ucy5UZWxlbWV0cnkuSW50ZXJmYWNlcy5Qcm9wZXJ0eUJhZ+kAgDdNaWNyb3NvZnQuQXBwbGljYXRpb25zLlRlbGVtZXRyeS5JbnRlcmZhY2VzLlByb3BlcnR5QmFnAS0JCQ0nY29tLm1pY3Jvc29mdC5vZmZpY2UucG93ZXJwb2ludF9BUFBUWVBFBGZ1bGweY29tLm1pY3Jvc29mdC5za3lkcml2ZV9BUFBUWVBFBGZ1bGwpU29mdHdhcmUuSGFyZHdhcmVJbnZlbnRvcnkuU2NyZWVuV2lkdGhEUEkHNTM3Ljg4MiFjb20ubWljcm9zb2Z0Lm9mZmljZS53b3JkX0FQUFRZUEUEZnVsbC5Tb2Z0d2FyZS5IYXJkd2FyZUludmVudG9yeS5TY3JlZW5XaWR0aEluUGl4ZWxzBDE0NDAkY29tLm1pY3Jvc29mdC5vZmZpY2Uub25lbm90ZV9BUFBUWVBFBGZ1bGwoY29tLm1pY3Jvc29mdC5vZmZpY2UucG93ZXJwb2ludF9VUEdSQURFRANZZXMvU29mdHdhcmUuSGFyZHdhcmVJbnZlbnRvcnkuU2NyZWVuSGVpZ2h0SW5QaXhlbHMEMjU2MAlrMmFwcFVVSUQkODQyNTYxMDAtYmMwMy0zMDI5LTliNjktYTM1OTM5OGNhMjQxImNvbS5taWNyb3NvZnQub2ZmaWNlLndvcmRfVVBHUkFERUQDWWVzImNvbS5taWNyb3NvZnQub2ZmaWNlLmV4Y2VsX0FQUFRZUEUEZnVsbCNjb20ubWljcm9zb2Z0Lm9mZmljZS5leGNlbF9VUEdSQURFRANZZXMqU29mdHdhcmUuSGFyZHdhcmVJbnZlbnRvcnkuU2NyZWVuSGVpZ2h0RFBJBzUzMi45ODMAAA_"
+    ]
+  },
+  {
+    "app": "com.skype.raider",
+    "version": "118882626",
+    "host": "b.config.skype.com",
+    "path": "/config/v1/Skype/20703_7.22.0.322",
+    "data": [
+      "U_BranchVideo",
+      "U_RevCommon",
+      "U_RevSkyper",
+      "U_CPUSpeedMHz",
+      "U_CLBuildName",
+      "U_CLRelease",
+      "U_RevGeneral",
+      "U_RevBMTools",
+      "U_Chipset",
+      "U_BranchAudio",
+      "U_OSVer",
+      "U_Manufacturer",
+      "U_Model",
+      "U_GIStackVersion",
+      "U_CLBuildType",
+      "U_clientid",
+      "U_DeviceID",
+      "U_CLVersion",
+      "U_global.os",
+      "U_CPUCount"
+    ]
+  },
+  {
+    "app": "unknown",
+    "version": "-1",
+    "host": "api.mobula.sdk.duapps.com",
+    "path": "/adunion/rtb/fetchAd",
+    "data": [
+      "U_aSize",
+      "U_vendor",
+      "U_res",
+      "U_sv",
+      "U_pn",
+      "U_model",
+      "U_op",
+      "U_sid",
+      "U_locale",
+      "U_ps",
+      "U_svn",
+      "U_ls",
+      "U_vn",
+      "U_dpi",
+      "U_sType",
+      "U_h",
+      "U_pkg",
+      "U_aid",
+      "U_sdk",
+      "U_play",
+      "U_ua",
+      "U_w",
+      "U_ntt",
+      "U_v"
+    ]
+  },
+  {
+    "app": "com.weather.Weather",
+    "version": "701000609",
+    "host": "sb.scorecardresearch.com",
+    "path": "/p2",
+    "data": [
+      "U_ns_ap_fg",
+      "U_ns_ap_ft",
+      "U_ns_ap_jb",
+      "U_ns_ap_id",
+      "U_ns_ap_lastrun",
+      "U_ns_ap_device",
+      "U_ns_ap_it",
+      "U_ns_ap_sv",
+      "U_ns_ap_dit",
+      "U_ns_ap_dft",
+      "U_ns_radio",
+      "U_c2",
+      "U_ns_ts",
+      "U_ns_ap_ar",
+      "U_ns_ap_an",
+      "U_ns_ap_pn",
+      "U_c1",
+      "U_ns_ap_runs",
+      "U_ns_ak_WgiKVDjARy9fVAftGtBieAEEkRc5lqOckH+bfBMzIEhLXo8RLMgrlAa+MwcCaGz8wACSNChSx1AvyV3oU53WCptXvymM5t90CpdjkmAfQT2ZtA4k8ua69zNnhD1SHMrh81qIZPcWkfGvR8FFxKMoEtapyH52RKfOKK5zdaK9A/4",
+      "U_ns_ap_lang",
+      "U_ns_ap_pfv",
+      "U_ns_ap_csf",
+      "U_c12",
+      "U_ns_ap_res",
+      "U_ns_ap_pv",
+      "U_ns_ap_pfm",
+      "U_name",
+      "U_ns_ap_ev",
+      "U_ns_ap_usage",
+      "U_ns_ap_cs",
+      "U_ns_ap_das",
+      "U_ns_ap_dbt",
+      "U_ns_type",
+      "U_ns_ap_i3",
+      "U_ns_ap_install",
+      "U_ns_ap_as",
+      "U_ns_ap_bt",
+      "U_ns_ap_ver",
+      "U_ns_nc",
+      "U_ns_ap_bi",
+      "U_ns_ap_gs",
+      "U_ns_ap_ec"
+    ]
+  },
+  {
+    "app": "com.yelp.android",
+    "version": "19008603",
+    "host": "auto-api.yelp.com",
+    "path": "/version/android",
+    "data": [
+      "H_Cookie2_$Version",
+      "U_lang",
+      "U_cc",
+      "U_android_api",
+      "U_signature__IkqFjDdnYd9bs2kzDakXT6JZcBw",
+      "U_nonce_fDg4kg_",
+      "U_time",
+      "H_x-screen-scale",
+      "U_app_version",
+      "U_efs_/tB9c1tGw9IRkYge+PiFFAHlcq6PH7q0MCuyJMuWu14mLIDqVxjQELXrTSHEdGY9gbPaQXc+NwGS/d1qVMKwobVHkYJz9Ex3uvZWozYXv+I",
+      "U_device_type",
+      "U_ywsid",
+      "U_signature__9VsGLbPy2NXwyTlaPfh60ZFWP08",
+      "U_nonce_qljrGg_"
+    ]
+  },
+  {
+    "app": "com.divum.MoneyControl",
+    "version": "88",
+    "host": "rtb-xv.openx.net",
+    "path": "/sync/dds",
+    "data": [
+      "U_ox_uid",
+      "U_ox_sc",
+      "U_google_push",
+      "U_google_gid",
+      "H_X-Requested-With",
+      "U_google_cver"
+    ]
+  },
+  {
+    "app": "com.pinterest",
+    "version": "60101",
+    "host": "trk.pinterest.com",
+    "path": "/v3/register/track_action/install_submit/",
+    "data": [
+      "H_X-Pinterest-AppState",
+      "H_X-Pinterest-Device",
+      "H_X-Pinterest-App-Type",
+      "U_client_id",
+      "U_oauth_signature",
+      "U_timestamp",
+      "H_X-Pinterest-Device-Class",
+      "H_X-Pinterest-InstallId",
+      "H_X-Pinterest-Device-HardwareId"
+    ]
+  }
+]
