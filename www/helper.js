@@ -208,18 +208,6 @@ function onSubmit() {
         data: JSON.stringify(payload),
         complete: function (data) {
             counter++;
-            /*
-            $.ajax({
-                url: "/counter",
-                type: "GET",
-                success: function(dataset) {
-                    if (counter == -1) {
-                        console.log(obj.counter)
-                        counter = obj.counter;
-                    }
-                }
-            });
-            */
             add_info();
         }
     });
@@ -244,10 +232,6 @@ function load_function() {
     add_info();
     add_options("options", default_categories);
 }
-
-/*
-
-*/
 
 window.onload = load_function;
 
