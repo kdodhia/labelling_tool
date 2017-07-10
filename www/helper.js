@@ -207,7 +207,19 @@ function onSubmit() {
         contentType: "application/json",
         data: JSON.stringify(payload),
         complete: function (data) {
-            counter = counter + 1;
+            counter++;
+            /*
+            $.ajax({
+                url: "/counter",
+                type: "GET",
+                success: function(dataset) {
+                    if (counter == -1) {
+                        console.log(obj.counter)
+                        counter = obj.counter;
+                    }
+                }
+            });
+            */
             add_info();
         }
     });
@@ -215,9 +227,13 @@ function onSubmit() {
 };
 
 function load_function() { 
-    $.get("/counter", function(obj) {
-        if (counter == -1) {
-            counter = obj.counter;
+    $.ajax({
+        url: "/counter",
+        type: "GET",
+        success: function(dataset) {
+            if (counter == -1) {
+                counter = dataset.counter;
+            }
         }
     });
     var myNode = document.getElementById("container");

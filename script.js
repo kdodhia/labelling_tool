@@ -42,26 +42,44 @@ app.use(bodyParser.json());
 app.use(express.static('www'));
 
 
-connection.query('CREATE DATABASE IF NOT EXISTS test', function (err) {
-    if (err) throw err;
-    connection.query("SELECT * FROM counter", function(err, rows){
-      if(err) {
-        throw err;
-      } else {
-        setValue(rows);
-      }
-    });
-});
 
-function setValue(value) {
-    console.log(value[0].count);
-    app.get("/counter", function(req, res) {
-        var obj = {
-            counter: value[0].count
-        };
-        res.send(obj)
+app.get("/counter", function(req, res) {
+
+
+    connection.query("SELECT * FROM counter", function(err, rows){
+        if(err) {
+            throw err;
+        } else {
+            var r = rows[0].count;
+            var obj = {
+                counter: r
+            };
+            res.send(obj);
+            /*
+            var obj = {
+                counter: value[0].count
+            };
+            console.log(obj)
+            res.send(obj)
+            */
+        }
     });
-}
+/*
+    connection.query('CREATE DATABASE IF NOT EXISTS test', function (err) {
+        if (err) throw err;
+        connection.query("SELECT * FROM counter", function(err, rows){
+            if(err) {
+                throw err;
+            } else {
+                var obj = {
+                    counter: value[0].count
+                };
+                res.send(obj)
+            }
+        });
+    });
+*/
+});
 
 
 // Update MySQL database
