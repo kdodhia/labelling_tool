@@ -20,7 +20,8 @@
 
 #container{
     font-family: 'Ubuntu', sans-serif;
-    width: 90%;
+    margin-left: 70px;
+    width: 70%;
     border: 1px solid #ccc;
     padding: 15px 40px 15px;
     margin-top:20px;
@@ -28,6 +29,15 @@
     border-radius: 6px;
     background-color: grey;
     text-align: left;
+}
+
+#num {
+    margin-left: 40px;
+}
+
+#indent {
+    text-align: left;
+    margin-left: 70px;
 }
 
 span
@@ -51,8 +61,6 @@ h4{
     color:red;
     word-wrap: break-word;
 }
-
-
 
 label{
     float: left;
