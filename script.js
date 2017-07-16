@@ -44,16 +44,19 @@ app.use(express.static('www'));
 
 
 app.get("/counter", function(req, res) {
-    connection.query("SELECT * FROM counter", function(err, rows){
-        if(err) {
-            throw err;
-        } else {
-            var count_ = rows[0].count;
-            var obj = {
-                counter: count_
-            };
-            res.send(obj);
-        }
+    connection.query('USE test', function (err) {
+        if (err) throw err;
+        connection.query("SELECT * FROM counter", function(err, rows){
+            if(err) {
+                throw err;
+            } else {
+                var count_ = rows[0].count;
+                var obj = {
+                    counter: count_
+                };
+                res.send(obj);
+            }
+        });
     });
 });
 

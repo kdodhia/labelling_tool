@@ -31,13 +31,25 @@
     text-align: left;
 }
 
-#num {
+#num_1 {
     margin-left: 40px;
+}
+
+#num_2 {
+    margin-left: 40px;
+    display: none;
+}
+ 
+#iframe1 {
+    margin-right: 150px;
+    float: right;
+    vertical-align: top;
 }
 
 #indent {
     text-align: left;
     margin-left: 70px;
+    display: none;
 }
 
 span

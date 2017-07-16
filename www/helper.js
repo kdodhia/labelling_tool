@@ -1,5 +1,6 @@
 var counter = -1;
 var current;
+var link = ""
 var default_categories = ["Select","Advertising", "Social/Communication", "Game", "Multimedia", "Information", "App-analytic", "Personalization", "Unknown"];
 var categories_l1 = ["Select","Phone ID", "Phone Status", "Personal Data", "Sensor Data", "Unknown"];
 var categories_l2 = [[],
@@ -36,11 +37,13 @@ var data_list = [];
 
 function add_info() {
     $.ajax({
-        url: 'dec29_100.json',
+        url: 'data.json',
         dataType: 'json',
         type: 'get',
         success: function(dataset) {
-            document.getElementById("app").innerHTML="<i> " + dataset[counter].app + "</i>";
+            link = 'https://play.google.com/store/apps/details?id='+dataset[counter].app+'pro&hl=en'
+            //link = "https://www.youtube.com/embed/owsfdh4gxyc";
+            document.getElementById("app").innerHTML="<i><a href='' onclick='runMyFunction(); return false;'> " + dataset[counter].app + "</a></i>";
             document.getElementById("version").innerHTML="<i> " + dataset[counter].version + "</i>";
             document.getElementById("host").innerHTML="<i> " + dataset[counter].host + "</i>";
             document.getElementById("path").innerHTML="<i> " + dataset[counter].path + "</i>";
@@ -48,10 +51,16 @@ function add_info() {
             current = dataset[counter];
             console.log(current);
         },
-        error: function() {
+        error: function(error) {
             alert('error loading orders');
+            console.log(error)
         }
     });
+}
+
+// edit iframe source
+function runMyFunction() {
+    document.getElementById('iframe1').src = link;
 }
 
 function add_options(id, list) {
@@ -158,19 +167,31 @@ function onChange(id) {
 }
 
 
-function add_data(dataset){    
+function add_data(dataset){   
+    for (key in dataset[counter].data) {
+        if ((key.charAt(0).toUpperCase() == key.charAt(0)) && (key.charAt(1)=='_')) {
+            var key_cut = key.substring(2);
+        }
+        var str = key_cut + ' : ' + dataset[counter].data[key];
+        data_list.push(str);
+        createRow(str);
+    }
+/*
     for (i = 0; i < dataset[counter].data.length; i++) {
         data_list.push(dataset[counter].data[i]);
         createRow(dataset[counter].data[i]);      
     }
+*/
 }
 
 
 function onSubmit() {
+    /*
     if (document.getElementById("options").value == 0)  {
         alert('Please choose a category.')
         return;
     }
+    */
     var dict = {};
     var id;
 
@@ -182,8 +203,7 @@ function onSubmit() {
             dict[data_list[data]]= categories_l3[first][second][document.getElementById(id).value];
         }
     }
-
-    alert('Form has been submitted.');
+    document.getElementById('iframe1').src = "";
 
     var payload = {
         app: current.app,
@@ -207,6 +227,7 @@ function onSubmit() {
         contentType: "application/json",
         data: JSON.stringify(payload),
         complete: function (data) {
+            alert('Form has been submitted.');
             counter++;
             add_info();
         }
