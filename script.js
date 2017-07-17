@@ -6,8 +6,8 @@ var mysql = require('mysql');
 // Application initialization
 var connection = mysql.createConnection({
         host     : 'localhost',
-        user     : 'root',
-        password : 'pwd'
+        user     : 'myuser',
+        password : 'pintobinkev'
     });
 
 
@@ -29,6 +29,7 @@ connection.query('CREATE DATABASE IF NOT EXISTS test', function (err) {
                 if (err) throw err;
         });
         connection.query('CREATE TABLE IF NOT EXISTS counter(count INT)');
+        connection.query('CREATE TABLE IF NOT EXISTS dataset(data VARCHAR(500))');
     });
 });
 
@@ -68,14 +69,12 @@ app.post('/users', function (req, res) {
     var version = req.body.version;
     var host = req.body.host;
     var path =  req.body.path;
-    var category = req.body.category;
     var data = req.body.data;
-    var sql = "INSERT INTO labels SET app='"+ app + "', version='" + version + "', host='"+ host + "', path='" + path + "', category='" + category +"', data='"+data+"'";
-    console.log(sql);
+    var dataset = req.body.data_set;
+    var sql = "INSERT INTO labels SET app='"+ app + "', version='" + version + "', host='"+ host + "', path='" + path + "', data='"+data+"'";
     connection.query(sql, 
         function (err, result) {
             if (err) throw err;
-            res.send('User added to database with ID: ' + result.insertId);
         }
     );
     var sql1 = 'UPDATE counter SET count = count + 1' 
@@ -84,6 +83,7 @@ app.post('/users', function (req, res) {
             if (err) throw err;
         }
     );
+    res.send("success")
 });
 
 var server = app.listen(9000, function () {

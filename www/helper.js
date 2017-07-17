@@ -41,15 +41,26 @@ function add_info() {
         dataType: 'json',
         type: 'get',
         success: function(dataset) {
-            link = 'https://play.google.com/store/apps/details?id='+dataset[counter].app+'pro&hl=en'
-            //link = "https://www.youtube.com/embed/owsfdh4gxyc";
-            document.getElementById("app").innerHTML="<i><a href='' onclick='runMyFunction(); return false;'> " + dataset[counter].app + "</a></i>";
-            document.getElementById("version").innerHTML="<i> " + dataset[counter].version + "</i>";
-            document.getElementById("host").innerHTML="<i> " + dataset[counter].host + "</i>";
-            document.getElementById("path").innerHTML="<i> " + dataset[counter].path + "</i>";
-            add_data(dataset);
-            current = dataset[counter];
-            console.log(current);
+            $.ajax({
+                url: "/counter",
+                type: "GET",
+                success: function(data) {
+                    counter = data.counter;
+                    console.log(counter)
+                    link = 'https://play.google.com/store/apps/details?id='+dataset[counter].app+'pro&hl=en';
+                    //link = "https://www.youtube.com/embed/owsfdh4gxyc";
+                    document.getElementById("app").innerHTML="<i><a href='' onclick='addiframe(); return false;'> " + dataset[counter].app + "</a></i>";
+                    document.getElementById("version").innerHTML="<i> " + dataset[counter].version + "</i>";
+                    document.getElementById("host").innerHTML="<i> " + dataset[counter].host + "</i>";
+                    document.getElementById("path").innerHTML="<i> " + dataset[counter].path + "</i>";
+                    add_data(dataset);
+                    current = dataset[counter];
+                },
+                error: function(error) {
+                    alert('error loading count');
+                    console.log(error)
+                }
+            });
         },
         error: function(error) {
             alert('error loading orders');
@@ -59,7 +70,7 @@ function add_info() {
 }
 
 // edit iframe source
-function runMyFunction() {
+function addiframe() {
     document.getElementById('iframe1').src = link;
 }
 
@@ -176,22 +187,10 @@ function add_data(dataset){
         data_list.push(str);
         createRow(str);
     }
-/*
-    for (i = 0; i < dataset[counter].data.length; i++) {
-        data_list.push(dataset[counter].data[i]);
-        createRow(dataset[counter].data[i]);      
-    }
-*/
 }
 
 
 function onSubmit() {
-    /*
-    if (document.getElementById("options").value == 0)  {
-        alert('Please choose a category.')
-        return;
-    }
-    */
     var dict = {};
     var id;
 
@@ -211,7 +210,7 @@ function onSubmit() {
         host: current.host,
         path: current.path,
         data: JSON.stringify(dict),
-        category: default_categories[document.getElementById("options").value]
+        data_set: current
     };
 
     var myNode = document.getElementById("container");
@@ -228,7 +227,6 @@ function onSubmit() {
         data: JSON.stringify(payload),
         complete: function (data) {
             alert('Form has been submitted.');
-            counter++;
             add_info();
         }
     });
@@ -236,15 +234,6 @@ function onSubmit() {
 };
 
 function load_function() { 
-    $.ajax({
-        url: "/counter",
-        type: "GET",
-        success: function(dataset) {
-            if (counter == -1) {
-                counter = dataset.counter;
-            }
-        }
-    });
     var myNode = document.getElementById("container");
     while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild);
