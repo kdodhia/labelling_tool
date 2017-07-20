@@ -46,15 +46,19 @@ function add_info() {
                 type: "GET",
                 success: function(data) {
                     counter = data.counter;
-                    console.log(counter)
-                    link = 'https://play.google.com/store/apps/details?id='+dataset[counter].app+'pro&hl=en';
-                    //link = "https://www.youtube.com/embed/owsfdh4gxyc";
-                    document.getElementById("app").innerHTML="<i><a href='' onclick='addiframe(); return false;'> " + dataset[counter].app + "</a></i>";
-                    document.getElementById("version").innerHTML="<i> " + dataset[counter].version + "</i>";
-                    document.getElementById("host").innerHTML="<i> " + dataset[counter].host + "</i>";
-                    document.getElementById("path").innerHTML="<i> " + dataset[counter].path + "</i>";
-                    add_data(dataset);
-                    current = dataset[counter];
+                    if (dataset[counter].data.length != 0) {
+                        link = 'https://play.google.com/store/apps/details?id='+dataset[counter].app+'pro&hl=en';
+                        document.getElementById("app").innerHTML="<i><a href='' onclick='addiframe(); return false;'> " + dataset[counter].app + "</a></i>";
+                        document.getElementById("version").innerHTML="<i> " + dataset[counter].version + "</i>";
+                        document.getElementById("host").innerHTML="<i> " + dataset[counter].host + "</i>";
+                        document.getElementById("path").innerHTML="<i> " + dataset[counter].path + "</i>";
+                        add_data(dataset);
+                        current = dataset[counter];
+                    } else {
+                        console.log(dataset[counter])
+                        onSkip();
+                    }
+                    
                 },
                 error: function(error) {
                     alert('error loading count');
@@ -65,6 +69,34 @@ function add_info() {
         error: function(error) {
             alert('error loading orders');
             console.log(error)
+        }
+    });
+}
+
+function onSkip(){
+    document.getElementById("loader").style.display = "block";
+    document.getElementById("form_sample").style.display = "none";
+
+    document.getElementById('iframe1').src = "";
+
+    var myNode = document.getElementById("container");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+    
+    var payload = {
+        skip: 1
+    };
+    data_list = [];
+
+    $.ajax({
+        url: "/users",
+        type: "POST",
+        async: true,
+        contentType: "application/json",
+        data: JSON.stringify(payload),
+        complete: function (data) {
+            add_info();
         }
     });
 }
@@ -180,6 +212,7 @@ function onChange(id) {
 
 function add_data(dataset){   
     for (key in dataset[counter].data) {
+        var key_cut = key;
         if ((key.charAt(0).toUpperCase() == key.charAt(0)) && (key.charAt(1)=='_')) {
             var key_cut = key.substring(2);
         }
@@ -187,10 +220,14 @@ function add_data(dataset){
         data_list.push(str);
         createRow(str);
     }
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("form_sample").style.display = "block";
 }
 
 
 function onSubmit() {
+    document.getElementById("loader").style.display = "block";
+    document.getElementById("form_sample").style.display = "none";
     var dict = {};
     var id;
 
@@ -205,6 +242,7 @@ function onSubmit() {
     document.getElementById('iframe1').src = "";
 
     var payload = {
+        skip: 0,
         app: current.app,
         version: current.version,
         host: current.host,
@@ -230,7 +268,6 @@ function onSubmit() {
             add_info();
         }
     });
-
 };
 
 function load_function() { 

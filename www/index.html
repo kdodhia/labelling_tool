@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="stylesheet.css"/> 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="helper.js"></script>
+        <div id="loader"></div>
         <div id="form">
             <div id="form_sample">
                 <h2> New Label </h2>
@@ -28,7 +29,10 @@
                 </select>
                 </div>
                 <br><br><br>
-                <button class="button" onclick="onSubmit()">Submit</button>
+                <div id="buttons">
+                    <button class="button" onclick="onSubmit()"> Submit </button>
+                    <button class="button" onclick="onSkip()"> Skip </button>
+                </div>
             </div>
         </div> 
     </body>

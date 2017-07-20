@@ -1,6 +1,24 @@
 /* below line is write to use google font online  */
 @import url(http://fonts.googleapis.com/css?family=Ubuntu);
 
+#loader {
+    position: absolute;
+    left: 40%;
+    top: 40%;
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    display:block;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 #form{
     align-self: center;
 }
@@ -16,12 +34,13 @@
     background-color: white;
     text-align: center;
     align-items: center;
+    display: none;
 }
 
 #container{
     font-family: 'Ubuntu', sans-serif;
     margin-left: 70px;
-    width: 70%;
+    width: 80%;
     border: 1px solid #ccc;
     padding: 15px 40px 15px;
     margin-top:20px;
@@ -77,6 +96,10 @@ h4{
 label{
     float: left;
     font-size: 16px;
+}
+
+p{
+    margin-left: 40px; 
 }
 
 .button {
