@@ -23,10 +23,11 @@
                 <label id="num_1"> 1. Please add details: </label><h4 id="data"></h4>
                 <div id="container">
                 </div>
-                <h4 id="num_2"> <font color="black">2. Please choose the category: </font></h4>
-                <div id = "indent">
-                <select id="options">
-                </select>
+                <br><br>
+                <div id="debugV">
+                Click to show/edit already classifed data. <input type="checkbox" name="checkbox" id="checkboxid">
+                </div>
+                <div id="container_2">
                 </div>
                 <br><br><br>
                 <div id="buttons">
@@ -36,4 +37,14 @@
             </div>
         </div> 
     </body>
+    <script type="text/javascript">
+        $('input[name=checkbox]').change(function(){
+            if($(this).is(':checked')) {
+                    // Checkbox is checked.
+                    showPredictionClassified()
+                } else {
+                    removePredictionClassified()
+                }
+            });
+    </script>
 </html>

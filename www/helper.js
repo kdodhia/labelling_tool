@@ -34,10 +34,48 @@ var categories_l3 = [[[]],
                         []],
                     [[]]];
 var data_list = [];
+var prev_classified_list = [];
+var rules_dict = {};
+var prev_labelled = {};
+var changes_dict = {};
+
+function loadPrevLabelledData(){
+    $.ajax({
+        url: "/rules",
+        type: "GET",
+        success: function(data) {
+            rules = data.rules;
+            for (row in rules) {
+                rules_dict[row[0]] = row[1]
+            }
+        },
+        error: function(error) {
+            alert('error loading rules');
+            console.log(error)
+        }
+    });
+}
+
+function loadChangeLog(){
+    $.ajax({
+        url: "/changes",
+        type: "GET",
+        success: function(data) {
+            changes_log = data.change_log;
+            for (row in changes_log) {
+                changes_dict[row[0]] = row[2]
+            }
+        },
+        error: function(error) {
+            alert('error loading changes_log');
+            console.log(error)
+        }
+    });
+}
 
 function add_info() {
     $.ajax({
-        url: 'data.json',
+        url: 'probabilityClassifier_data.json',
         dataType: 'json',
         type: 'get',
         success: function(dataset) {
@@ -46,7 +84,9 @@ function add_info() {
                 type: "GET",
                 success: function(data) {
                     counter = data.counter;
-                    if (dataset[counter].data.length != 0) {
+                    if (!(($.isEmptyObject(dataset[counter].data.unknown)) & ($.isEmptyObject(dataset[counter].data.classified)))) {
+                        loadPrevLabelledData()
+                        loadChangeLog()
                         link = 'https://play.google.com/store/apps/details?id='+dataset[counter].app+'pro&hl=en';
                         document.getElementById("app").innerHTML="<i><a href='' onclick='addiframe(); return false;'> " + dataset[counter].app + "</a></i>";
                         document.getElementById("version").innerHTML="<i> " + dataset[counter].version + "</i>";
@@ -73,6 +113,34 @@ function add_info() {
     });
 }
 
+function showPredictionClassified(){
+
+    document.getElementById('container_2').style.display = "block";
+    for (key in current.data.classified) {
+        var key_cut = key;
+        if ((key.charAt(0).toUpperCase() == key.charAt(0)) && (key.charAt(1)=='_')) {
+            var key_cut = key.substring(2);
+        }
+        if (key_cut in changes_dict) {
+            // do something
+        }else {
+            var str = key_cut + ' : ' + current.data.classified[key];
+            prev_classified_list.push(key_cut)
+            createRow(key_cut, str, "container_2");
+        }
+    }
+}
+
+function removePredictionClassified() {
+    document.getElementById("checkboxid").checked = false;
+    var myNode = document.getElementById("container_2");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+    document.getElementById('container_2').style.display = "none";
+}
+
+
 function onSkip(){
     document.getElementById("loader").style.display = "block";
     document.getElementById("form_sample").style.display = "none";
@@ -83,6 +151,10 @@ function onSkip(){
     while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild);
     }
+    removePredictionClassified()
+    rules_dict = {};
+    prev_labelled = {};
+    changes_dict = {};
     
     var payload = {
         skip: 1
@@ -117,10 +189,10 @@ function add_options(id, list) {
     }
 }
 
-function createRow(id) {
+function createRow(id, txt, container) {
     var div = document.createElement('div');
     var label = document.createElement('label');
-    var text = document.createTextNode(id);
+    var text = document.createTextNode(txt);
     var span = document.createElement('span');
     div.className = 'line';
     label.appendChild(text);
@@ -164,7 +236,7 @@ function createRow(id) {
     div.appendChild(sub_three);
     sub_two.style.visibility = "hidden";
     sub_three.style.visibility = "hidden";
-    document.getElementById('container').appendChild(div);
+    document.getElementById(container).appendChild(div);
 }
 
 function onChange(id) {
@@ -211,14 +283,19 @@ function onChange(id) {
 
 
 function add_data(dataset){   
-    for (key in dataset[counter].data) {
+    for (key in dataset[counter].data.unknown) {
         var key_cut = key;
         if ((key.charAt(0).toUpperCase() == key.charAt(0)) && (key.charAt(1)=='_')) {
             var key_cut = key.substring(2);
         }
-        var str = key_cut + ' : ' + dataset[counter].data[key];
-        data_list.push(str);
-        createRow(str);
+        if (key_cut in rules_dict) {
+            prev_labelled[key_cut] = rules_dict[key_cut];
+        } else {
+            var str = key_cut + ' : ' + dataset[counter].data.unknown[key];
+            data_list.push(str);
+            createRow(str, str, "container");
+        }
+        
     }
     document.getElementById("loader").style.display = "none";
     document.getElementById("form_sample").style.display = "block";
@@ -230,6 +307,16 @@ function onSubmit() {
     document.getElementById("form_sample").style.display = "none";
     var dict = {};
     var id;
+    var change_log = {};
+
+    for (key in prev_classified_list) {
+        id = prev_classified_list[key]+"%_"+"2";
+        if ((document.getElementById(id).value != null) && (document.getElementById(id).value != 0)) {
+            var first = document.getElementById(prev_classified_list[key] + "%_"+"0").value;
+            var second = document.getElementById(prev_classified_list[key] + "%_"+"1").value;
+            change_log[prev_classified_list[key]]= categories_l3[first][second][document.getElementById(id).value];
+        }
+    }
 
     for (data in data_list) {
         id = data_list[data]+"%_"+"2";
@@ -241,21 +328,29 @@ function onSubmit() {
     }
     document.getElementById('iframe1').src = "";
 
+
     var payload = {
         skip: 0,
         app: current.app,
         version: current.version,
         host: current.host,
         path: current.path,
-        data: JSON.stringify(dict),
-        data_set: current
+        data_unknown: JSON.stringify(dict),
+        data_new_rules: dict,
+        data_classified: JSON.stringify(current.data.classified),
+        data_change_log: change_log,
+        data_prev_labelled: JSON.stringify(prev_labelled)
     };
 
     var myNode = document.getElementById("container");
     while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild);
     }
+    removePredictionClassified()
     data_list = [];
+    rules_dict = {};
+    prev_labelled = {};
+    changes_dict = {};
     
     $.ajax({
         url: "/users",
@@ -277,7 +372,6 @@ function load_function() {
     }
     data_list = [];
     add_info();
-    add_options("options", default_categories);
 }
 
 window.onload = load_function;

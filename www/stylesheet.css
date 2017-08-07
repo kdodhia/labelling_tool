@@ -50,8 +50,26 @@
     text-align: left;
 }
 
+#container_2{
+    font-family: 'Ubuntu', sans-serif;
+    margin-left: 70px;
+    width: 80%;
+    border: 1px solid #ccc;
+    padding: 15px 40px 15px;
+    margin-top:20px;
+    box-shadow: 0 0 15px;
+    border-radius: 6px;
+    background-color: grey;
+    text-align: left;
+    display: none;
+}
+
 #num_1 {
     margin-left: 40px;
+}
+
+#debugV {
+    text-align: left;
 }
 
 #num_2 {
