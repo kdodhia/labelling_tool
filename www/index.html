@@ -21,12 +21,12 @@
                 <label> Data: </label><h4 id="data"></h4>
                 <br>
                 <label id="num_1"> 1. Please add details: </label><h4 id="data"></h4>
+                <br>
+                <label id="num_2"> Unknown data: </label><h4 id="data"></h4>
                 <div id="container">
                 </div>
-                <br><br>
-                <div id="debugV">
-                Click to show/edit already classifed data. <input type="checkbox" name="checkbox" id="checkboxid">
-                </div>
+                <br>
+                <label id="num_2"> Partially classifed data: </label><h4 id="data"></h4>
                 <div id="container_2">
                 </div>
                 <br><br><br>
@@ -37,14 +37,4 @@
             </div>
         </div> 
     </body>
-    <script type="text/javascript">
-        $('input[name=checkbox]').change(function(){
-            if($(this).is(':checked')) {
-                    // Checkbox is checked.
-                    showPredictionClassified()
-                } else {
-                    removePredictionClassified()
-                }
-            });
-    </script>
 </html>

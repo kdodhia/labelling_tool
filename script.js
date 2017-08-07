@@ -23,9 +23,9 @@ connection.query('CREATE DATABASE IF NOT EXISTS test', function (err) {
             + 'version VARCHAR(10),'
             + 'host VARCHAR(100),'
             + 'path VARCHAR(500),'
-            + 'category VARCHAR(30),'
-            + 'data_prev_unknown VARCHAR(1000),'
-            + 'data_prev_classifed VARCHAR(5000)'
+            + 'unknown_classified VARCHAR(2000),'
+            + 'partially_known_classified VARCHAR(2000),'
+            + 'prev_labelled VARCHAR(2000)'
             +  ')', function (err) {
                 if (err) throw err;
         });
@@ -105,24 +105,25 @@ app.post('/users', function (req, res) {
         var version = req.body.version;
         var host = req.body.host;
         var path =  req.body.path;
-        var data_unknown = req.body.data_unknown;
-        var data_new_rules = req.body.data_new_rules;
-        var data_change_log = req.body.data_change_log;
-        var data_classified = req.body.data_classified;
-        var sql = "INSERT INTO labels SET app='"+ app + "', version='" + version + "', host='"+ host + "', path='" + path + "', data_prev_unknown='"+data_unknown+ "', data_prev_classifed='"+data_classified+"'";
+        var unknown_classified = req.body.data_unknown_classified;
+        var partially_known_classified = req.body.data_partially_known_classified;
+        var prev_labelled = req.body.data_prev_labelled;
+        var rules = req.body.rules_dict;
+        var sql = "INSERT INTO labels SET app='"+ app + "', version='" + version + "', host='"+ host + "', path='" + path + "', unknown_classified='"+unknown_classified+ "', partially_known_classified='"+partially_known_classified+ "', prev_labelled='"+prev_labelled+"'";
         connection.query(sql, 
             function (err, result) {
                 if (err) throw err;
             }
         );
-        for (key in data_new_rules) {
-            var sql = "INSERT INTO rules SET value='"+ key + "', classifier='" + data_new_rules[key] + "'";
+        for (key in rules) {
+            var sql = "INSERT INTO rules SET value='"+ key + "', classifier='" + rules[key] + "'";
             connection.query(sql, 
                 function (err, result) {
                     if (err) throw err;
                 }
             );
         }
+        /*
         for (key in data_change_log) {
             var sql = "INSERT INTO change_log SET field='"+ key + "', new='" + data_change_log[key] + "'";
             connection.query(sql, 
@@ -131,6 +132,7 @@ app.post('/users', function (req, res) {
                 }
             );
         }
+        */
     }
     var sql1 = 'UPDATE counter SET count = count + 1' 
     connection.query(sql1, 
