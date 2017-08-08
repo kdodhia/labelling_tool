@@ -63,21 +63,6 @@ app.get("/counter", function(req, res) {
     });
 });
 
-app.get("/changes", function(req, res) {
-    connection.query('USE test', function (err) {
-        if (err) throw err;
-        connection.query("SELECT * FROM change_log", function(err, rows){
-            if(err) {
-                throw err;
-            } else {
-                var obj = {
-                    change_log: rows
-                };
-                res.send(obj);
-            }
-        });
-    });
-});
 
 app.get("/rules", function(req, res) {
     connection.query('USE test', function (err) {
@@ -109,6 +94,7 @@ app.post('/users', function (req, res) {
         var partially_known_classified = req.body.data_partially_known_classified;
         var prev_labelled = req.body.data_prev_labelled;
         var rules = req.body.rules_dict;
+        var change_logs = req.body.data_change_log
         var sql = "INSERT INTO labels SET app='"+ app + "', version='" + version + "', host='"+ host + "', path='" + path + "', unknown_classified='"+unknown_classified+ "', partially_known_classified='"+partially_known_classified+ "', prev_labelled='"+prev_labelled+"'";
         connection.query(sql, 
             function (err, result) {
@@ -123,16 +109,14 @@ app.post('/users', function (req, res) {
                 }
             );
         }
-        /*
-        for (key in data_change_log) {
-            var sql = "INSERT INTO change_log SET field='"+ key + "', new='" + data_change_log[key] + "'";
+        for (row in change_logs) {
+            var sql = "INSERT INTO change_log SET field='"+ change_logs[row][0] + "', previous='" + change_logs[row][1] + "', new='" + change_logs[row][2] + "'";
             connection.query(sql, 
                 function (err, result) {
                     if (err) throw err;
                 }
             );
         }
-        */
     }
     var sql1 = 'UPDATE counter SET count = count + 1' 
     connection.query(sql1, 

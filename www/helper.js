@@ -80,45 +80,11 @@ var categories_l3 = [[[]],
 
 var data_list = [];
 var function_classified_list = [];
-var rules_dict = {};
+var rules_dict = {}
 var prev_labelled = {};
+var original_classifiers = {};
 
 
-function loadPrevLabelledData(){
-    $.ajax({
-        url: "/rules",
-        type: "GET",
-        success: function(data) {
-            rules = data.rules;
-            for (row in rules) {
-                rules_dict[row[0]] = row[1]
-            }
-        },
-        error: function(error) {
-            alert('error loading rules');
-            console.log(error)
-        }
-    });
-}
-
-/*
-function loadChangeLog(){
-    $.ajax({
-        url: "/changes",
-        type: "GET",
-        success: function(data) {
-            changes_log = data.change_log;
-            for (row in changes_log) {
-                changes_dict[row[0]] = row[2]
-            }
-        },
-        error: function(error) {
-            alert('error loading changes_log');
-            console.log(error)
-        }
-    });
-}
-*/
 
 function add_info() {
     $.ajax({
@@ -126,22 +92,40 @@ function add_info() {
         dataType: 'json',
         type: 'get',
         success: function(dataset) {
+
             $.ajax({
                 url: "/counter",
                 type: "GET",
                 success: function(data) {
                     counter = data.counter;
                     if (!(($.isEmptyObject(dataset[counter].data.unknown)) & ($.isEmptyObject(dataset[counter].data.classified)))) {
-                        loadPrevLabelledData()
-                        //loadChangeLog()
-                        link = 'https://play.google.com/store/apps/details?id='+dataset[counter].app+'pro&hl=en';
-                        document.getElementById("app").innerHTML="<i><a href='' onclick='addiframe(); return false;'> " + dataset[counter].app + "</a></i>";
-                        document.getElementById("version").innerHTML="<i> " + dataset[counter].version + "</i>";
-                        document.getElementById("host").innerHTML="<i> " + dataset[counter].host + "</i>";
-                        document.getElementById("path").innerHTML="<i> " + dataset[counter].path + "</i>";
-                        add_data(dataset);
-                        current = dataset[counter];
-                        showPredictionClassified()
+                        
+                        $.ajax({
+                            url: "/rules",
+                            type: "GET",
+                            success: function(data_rule) {
+                                rules = data_rule.rules;
+                                for (row in rules) {
+                                    rules_dict[rules[row].value] = rules[row].classifier
+                                }
+                                link = 'https://play.google.com/store/apps/details?id='+dataset[counter].app+'pro&hl=en';
+                                document.getElementById("app").innerHTML="<i><a href='' onclick='addiframe(); return false;'> " + dataset[counter].app + "</a></i>";
+                                document.getElementById("version").innerHTML="<i> " + dataset[counter].version + "</i>";
+                                document.getElementById("host").innerHTML="<i> " + dataset[counter].host + "</i>";
+                                document.getElementById("path").innerHTML="<i> " + dataset[counter].path + "</i>";
+                                add_data(dataset);
+                                current = dataset[counter];
+                                showPredictionClassified();
+                                if ((data_list.length < 1) && (function_classified_list.length < 1)) {
+                                    onSkip();
+                                }
+                            },
+                            error: function(error) {
+                                alert('error loading rules');
+                                console.log(error)
+                            }
+                        });
+
                     } else {
                         console.log(dataset[counter])
                         onSkip();
@@ -153,6 +137,7 @@ function add_info() {
                     console.log(error)
                 }
             });
+
         },
         error: function(error) {
             alert('error loading orders');
@@ -192,6 +177,7 @@ function showPredictionClassified(){
             function_classified_list.push(key_cut)
             createRow(key_cut, str, "container_2");
             setCols(key_cut, current.data.classified[key])
+            original_classifiers[key_cut] = current.data.classified[key]
         }
     }
 }
@@ -220,6 +206,7 @@ function onSkip(){
     function_classified_list = [];
     rules_dict = {};
     prev_labelled = {};
+    original_classifiers = {};
     
     var payload = {
         skip: 1
@@ -350,6 +337,7 @@ function add_data(dataset){
         if ((key.charAt(0).toUpperCase() == key.charAt(0)) && (key.charAt(1)=='_')) {
             var key_cut = key.substring(2);
         }
+        console.log(rules_dict)
         if (key_cut in rules_dict) {
             prev_labelled[key_cut] = rules_dict[key_cut];
         } else {
@@ -371,18 +359,25 @@ function onSubmit() {
     var id;
     var partially_known_classified = {};
     var rules = {}
+    var classifier;
+    var change_log = []
 
     for (key in function_classified_list) {
         id = function_classified_list[key]+"%_"+"2";
         if ((document.getElementById(id).value != null) && (document.getElementById(id).value != 0)) {
             var first = document.getElementById(function_classified_list[key] + "%_"+"0").value;
             var second = document.getElementById(function_classified_list[key] + "%_"+"1").value;
+            classifier = categories_l1[first] + '.' + categories_l2[first][second]
+            if (original_classifiers[function_classified_list[key]] != classifier) {
+                var list = [function_classified_list[key], original_classifiers[function_classified_list[key]], classifier]
+                change_log.push(list)
+            }
             var second_id = function_classified_list[key]+"%_"+"1";
-            if ((categories_l3[first][second][document.getElementById(id).value] == "Unknown") || 
+            if ((categories_l3[first][second][document.getElementById(id).value] == "unknown") || 
                 (categories_l3[first][second][document.getElementById(id).value] == "")){
                 str = categories_l2[first][document.getElementById(second_id).value]
             } else {
-                str = categories_l3[first][second][document.getElementById(id).value]
+                str = categories_l2[first][document.getElementById(second_id).value] + "."+categories_l3[first][second][document.getElementById(id).value]
             }
             partially_known_classified[function_classified_list[key]]= str;
             rules[function_classified_list[key]]= str
@@ -396,14 +391,15 @@ function onSubmit() {
             var first = document.getElementById(data_list[data] + "%_"+"0").value;
             var second = document.getElementById(data_list[data] + "%_"+"1").value;
             var second_id = data_list[data]+"%_"+"1";
-            if ((categories_l3[first][second][document.getElementById(id).value] == "Unknown") || 
+            if ((categories_l3[first][second][document.getElementById(id).value] == "unknown") || 
                 (categories_l3[first][second][document.getElementById(id).value] == "")){
                 str = categories_l2[first][document.getElementById(second_id).value]
             } else {
-                str = categories_l3[first][second][document.getElementById(id).value]
+                str = categories_l2[first][document.getElementById(second_id).value] + "."+categories_l3[first][second][document.getElementById(id).value]
             }
             unknown_classified[data_list[data]]= str;
-            rules[data_list[data]]= str;
+            adjusted_key = data_list[data].split(' : ')
+            rules[adjusted_key[0]]= str;
         }
     }
 
@@ -419,7 +415,8 @@ function onSubmit() {
         data_unknown_classified: JSON.stringify(unknown_classified),
         data_partially_known_classified: JSON.stringify(partially_known_classified),
         data_prev_labelled: JSON.stringify(prev_labelled),
-        rules_dict: rules
+        rules_dict: rules,
+        data_change_log: change_log
     };
 
     var myNode = document.getElementById("container");
@@ -431,6 +428,7 @@ function onSubmit() {
     function_classified_list = [];
     rules_dict = {};
     prev_labelled = {};
+    original_classifiers = {};
     
     $.ajax({
         url: "/users",
