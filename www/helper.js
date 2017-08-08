@@ -36,11 +36,11 @@ var categories_l3 = [[[]],
                     [[]]];
 */
 
-var categories_l1 = ["Select","id", "phone", "personal", "sensor", "general", "junk"];
+var categories_l1 = ["Select","id", "phone", "personal", "sensor", "general", "junk", "other"];
 var categories_l2 = [[],
                     ["Select", "adid", "instanceid", "hwid", "app", "unknown"],
-                    ["Select","battery", "device", "network", "phonestate", "notification", "tasks", "account", "unknown"],
-                    ["Select","contact", "calendar", "sms", "storage","unknown"],
+                    ["Select","battery", "device", "network", "phonestate", "notification", "tasks", "appinfo", "unknown"],
+                    ["Select","contact", "calendar", "sms", "storage", "account", "unknown"],
                     ["Select","camera", "location", "microphone", "accelerometer", "gyroscope", "proximity", "unknown"],
                     ["Select","health", "emergency", "advertisement", "analytic", "sharing", "time", "appinfo", "unknown"],
                     ["junk"]];
@@ -53,20 +53,25 @@ var categories_l3 = [[[]],
                         ["Select", "unknown"],[]],
                     [[],
                         ["Select","power management","intelligent power saving","Task Trigger (Context inference)", "unknown"],
-                        ["Select","ui customization", "advertising", "unknown"],
+                        ["Select","ui customization", "advertising", "language", "OS info","Manufacturer", "unknown"],
                         ["Select","Task Trigger (Context inference)", "lower resolution image", "unknown"],
-                        ["Select", "unknown"],["Select", "unknown"],["Select", "unknown"],["Select", "unknown"], []],
+                        ["Select","call state", "screen light", "unknown"],
+                        ["Select", "UI Personalization (lock screen)", "Interruption management", "unknown"],
+                        ["Select", "Task management", "Cross app communciation", "unknown"],
+                        ["Select", "SDK", "Package ID", "unknown"], []],
                     [[],
                         ["Select","Backup and Synchronization", "Contact Management", "Blacklist", "Call and SMS", "Contact-based Customization","Email", "Find friends","Record","Fake Calls and SMS", "Remind", "unknown"],
                         ["Select","Task Trigger (Context inference)", "Schedule", "Alarm", "unknown"],
                         ["Select","send sms ", "organize sms (clustering, delete, re-rank)", "extract sms content (check notification)", "block sms", "send sms commands/confirmation","schedule sms", "back up/synchronize sms", "receive msg/messaging", "unknown"],
                         ["Select","access album ", "photo editing", "data backup", "download", "persistent logging", "unknown"],
+                        ["Select", "unknown"],
                         []],
                     [[],
                         ["Select","Flashlight (activate, encode)", "Video streaming/Video chat", "QRCode/Barcode scan", "Document scan (biz card, coupon, check)", "Augment reality","Social Media (sharing, communication)","Text recognition (translation, )", "unknown"],
                         ["Select","Search Nearby Places", "Location-based Customization ", "Transportation Information", "Recording","Map and Navigation", "Geosocial Networking","Geotagging", "Location Spoofing", "Alert and Remind", "Location-based game", "unknown"],
                         ["Select","sound/blow detection", "voice message", "video/voice calling", "voice control/command", "speech recognition","audio/video recording","* call recording", "advertising","authentication","data transmission","music", "unknown"],
-                        ["Select", "unknown"],["Select", "unknown"],["Select", "unknown"],[]],
+                        ["Select", "Game", "step-counter","unknown"],
+                        ["Select", "game", "compass", "step-counter", "unknown"],["Select", "Game", "Speaker/display activation", "unknown"],[]],
                     [[],
                         ["unknown"],
                         ["unknown"],
@@ -170,8 +175,10 @@ function showPredictionClassified(){
         if ((key.charAt(0).toUpperCase() == key.charAt(0)) && (key.charAt(1)=='_')) {
             var key_cut = key.substring(2);
         }
-        if (key_cut in rules_dict) {
-            prev_labelled[key_cut] = rules_dict[key_cut];
+        var temp  = key_cut.split(' : ')
+        adjusted_key = temp[0]
+        if (adjusted_key in rules_dict) {
+            prev_labelled[key_cut] = rules_dict[adjusted_key];
         } else {
             var str = key_cut;
             function_classified_list.push(key_cut)
@@ -254,6 +261,9 @@ function createRow(id, txt, container) {
     var sub_one = document.createElement('select');
     var sub_two = document.createElement('select');
     var sub_three = document.createElement('select');
+    var input = document.createElement('input');
+    input.type = "text"; 
+    input.placeholder = "Please Specify"
 
     sub_one.addEventListener("change", function() {
         onChange(this.id);
@@ -268,6 +278,7 @@ function createRow(id, txt, container) {
     sub_one.id = id+"%_"+"0";
     sub_two.id = id+"%_"+"1";
     sub_three.id = id+"%_"+"2";
+    input.id = id+"%_"+"3";
 
     var x;
     var t;
@@ -283,8 +294,11 @@ function createRow(id, txt, container) {
     div.appendChild(sub_one);
     div.appendChild(sub_two);
     div.appendChild(sub_three);
+    div.appendChild(input);
     sub_two.style.visibility = "hidden";
     sub_three.style.visibility = "hidden";
+    input.style.visibility = "hidden";
+    
     document.getElementById(container).appendChild(div);
 }
 
@@ -294,6 +308,12 @@ function onChange(id) {
     sliced = id.substring(0, id.length-1);
 
     if (level == "0") {
+
+        var inputNode = document.getElementById(sliced + "3");
+        while (inputNode.firstChild) {
+            inputNode.removeChild(inputNode.firstChild);
+        }
+        inputNode.style.visibility = "hidden";
 
         var curNode = document.getElementById(sliced + "1");
         curNode.style.visibility = "visible";
@@ -313,8 +333,13 @@ function onChange(id) {
             curNode.style.visibility = "hidden";
         }
 
-        add_options(sliced + "1", categories_l2[index]);
-
+        idx_other = categories_l1.indexOf("other");
+        if (index == idx_other) {
+            inputNode = document.getElementById(sliced + "3");
+            inputNode.style.visibility = "visible";
+        } else {
+            add_options(sliced + "1", categories_l2[index]);
+        }
     } else if (level == "1") {
 
         var prev = document.getElementById(sliced + "0").value;
@@ -341,7 +366,11 @@ function add_data(dataset){
         if (key_cut in rules_dict) {
             prev_labelled[key_cut] = rules_dict[key_cut];
         } else {
-            var str = key_cut + ' : ' + dataset[counter].data.unknown[key];
+            val = dataset[counter].data.unknown[key];
+            if (val.length > 10) {
+                val = val.substring(0, 10) + "...";
+            }
+            var str = key_cut + ' : ' + val;
             data_list.push(str);
             createRow(str, str, "container");
         }
@@ -363,40 +392,56 @@ function onSubmit() {
     var change_log = []
 
     for (key in function_classified_list) {
+        id_first = function_classified_list[key]+"%_"+"0";
+        idx_other = categories_l1.indexOf("other");
+        if (document.getElementById(id_first).value == idx_other) {
+            id_input = function_classified_list[key]+"%_"+"3";
+            val = document.getElementById(id_input).value
+            if (val != null) {
+                partially_known_classified[function_classified_list[key]]= val;
+                adjusted_key = function_classified_list[key].split(' : ')
+                rules[adjusted_key[0]]= val;
+
+                var list = [adjusted_key[0], original_classifiers[function_classified_list[key]], val]
+                change_log.push(list)
+            }
+        }
         id = function_classified_list[key]+"%_"+"2";
         if ((document.getElementById(id).value != null) && (document.getElementById(id).value != 0)) {
             var first = document.getElementById(function_classified_list[key] + "%_"+"0").value;
             var second = document.getElementById(function_classified_list[key] + "%_"+"1").value;
             classifier = categories_l1[first] + '.' + categories_l2[first][second]
             if (original_classifiers[function_classified_list[key]] != classifier) {
-                var list = [function_classified_list[key], original_classifiers[function_classified_list[key]], classifier]
+                adjusted_key = function_classified_list[key].split(' : ')
+                var list = [adjusted_key[0], original_classifiers[function_classified_list[key]], classifier]
                 change_log.push(list)
             }
             var second_id = function_classified_list[key]+"%_"+"1";
-            if ((categories_l3[first][second][document.getElementById(id).value] == "unknown") || 
-                (categories_l3[first][second][document.getElementById(id).value] == "")){
-                str = categories_l2[first][document.getElementById(second_id).value]
-            } else {
-                str = categories_l2[first][document.getElementById(second_id).value] + "."+categories_l3[first][second][document.getElementById(id).value]
-            }
+            str = categories_l2[first][document.getElementById(second_id).value] + "."+categories_l3[first][second][document.getElementById(id).value]
             partially_known_classified[function_classified_list[key]]= str;
-            rules[function_classified_list[key]]= str
+            adjusted_key = function_classified_list[key].split(' : ')
+            rules[adjusted_key[0]]= str;
         }
     }
 
     for (data in data_list) {
+        id_first = data_list[data]+"%_"+"0";
+        idx_other = categories_l1.indexOf("other");
+        if (document.getElementById(id_first).value == idx_other) {
+            id_input = data_list[data]+"%_"+"3";
+            val = document.getElementById(id_input).value
+            if (val != null) {
+                unknown_classified[data_list[data]]= val;
+                adjusted_key = data_list[data].split(' : ')
+                rules[adjusted_key[0]]= val;
+            }
+        }
         id = data_list[data]+"%_"+"2";
         if ((document.getElementById(id).value != null) && (document.getElementById(id).value != 0)) {
-
             var first = document.getElementById(data_list[data] + "%_"+"0").value;
             var second = document.getElementById(data_list[data] + "%_"+"1").value;
             var second_id = data_list[data]+"%_"+"1";
-            if ((categories_l3[first][second][document.getElementById(id).value] == "unknown") || 
-                (categories_l3[first][second][document.getElementById(id).value] == "")){
-                str = categories_l2[first][document.getElementById(second_id).value]
-            } else {
-                str = categories_l2[first][document.getElementById(second_id).value] + "."+categories_l3[first][second][document.getElementById(id).value]
-            }
+            str = categories_l2[first][document.getElementById(second_id).value] + "."+categories_l3[first][second][document.getElementById(id).value]
             unknown_classified[data_list[data]]= str;
             adjusted_key = data_list[data].split(' : ')
             rules[adjusted_key[0]]= str;
