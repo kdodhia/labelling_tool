@@ -6,8 +6,8 @@ var mysql = require('mysql');
 // Application initialization
 var connection = mysql.createConnection({
         host     : 'localhost',
-        user     : 'root',
-        password : 'pwd'
+        user     : 'myuser',
+        password : 'pintobinkev'
     });
 
 
@@ -19,6 +19,7 @@ connection.query('CREATE DATABASE IF NOT EXISTS test', function (err) {
         connection.query('CREATE TABLE IF NOT EXISTS labels('
             + 'id INT NOT NULL AUTO_INCREMENT,'
             + 'PRIMARY KEY(id),'
+            + 'timestamp BIGINT,'
             + 'app VARCHAR(200),'
             + 'version VARCHAR(20),'
             + 'host VARCHAR(200),'
@@ -29,9 +30,9 @@ connection.query('CREATE DATABASE IF NOT EXISTS test', function (err) {
             +  ')', function (err) {
                 if (err) throw err;
         });
-        connection.query('CREATE TABLE IF NOT EXISTS rules(value VARCHAR(200), classifier VARCHAR(200))');
-        connection.query('CREATE TABLE IF NOT EXISTS change_log(field VARCHAR(200), previous VARCHAR(200), new VARCHAR(200))');
-        connection.query('CREATE TABLE IF NOT EXISTS already_classified(host VARCHAR(200), path VARCHAR(500))');
+        connection.query('CREATE TABLE IF NOT EXISTS rules(value VARCHAR(200), classifier VARCHAR(200), timestamp BIGINT)');
+        connection.query('CREATE TABLE IF NOT EXISTS change_log(field VARCHAR(200), previous VARCHAR(200), new VARCHAR(200), timestamp BIGINT)');
+        connection.query('CREATE TABLE IF NOT EXISTS already_classified(host VARCHAR(200), path VARCHAR(500), timestamp BIGINT)');
     });
 });
 
@@ -85,6 +86,7 @@ app.post('/users', function (req, res) {
     var host = req.body.host;
     var path =  req.body.path;
     var version = req.body.version;
+    var timestamp = req.body.timestamp;
 
     if (bool == 0){
         var unknown_classified = req.body.data_unknown_classified;
@@ -93,7 +95,13 @@ app.post('/users', function (req, res) {
         var rules = req.body.rules_dict;
         var change_logs = req.body.data_change_log
 
-        var sql = "INSERT INTO labels SET app='"+ app + "', version='" + version + "', host='"+ host + "', path='" + path + "', unknown_classified='"+unknown_classified+ "', partially_known_classified='"+partially_known_classified+ "', prev_labelled='"+prev_labelled+"'";
+        var sql = "INSERT INTO labels SET app='"+ app + "', version='" + version + "', host='"+ host + "', timestamp='"+ timestamp + "', path='" + path + "', unknown_classified='"+unknown_classified+ "', partially_known_classified='"+partially_known_classified+ "', prev_labelled='"+prev_labelled+"'";
+        connection.query(sql, 
+            function (err, result) {
+                if (err) throw err;
+            }
+        );
+        var sql = "INSERT INTO already_classified SET host='"+ host + "', timestamp='"+ timestamp + "', path='" + path + "'";
         connection.query(sql, 
             function (err, result) {
                 if (err) throw err;
@@ -101,7 +109,7 @@ app.post('/users', function (req, res) {
         );
 
         for (key in rules) {
-            var sql = "INSERT INTO rules SET value='"+ key + "', classifier='" + rules[key] + "'";
+            var sql = "INSERT INTO rules SET value='"+ key + "', timestamp='" + timestamp + "', classifier='" + rules[key] + "'";
             connection.query(sql, 
                 function (err, result) {
                     if (err) throw err;
@@ -109,7 +117,7 @@ app.post('/users', function (req, res) {
             );
         }
         for (row in change_logs) {
-            var sql = "INSERT INTO change_log SET field='"+ change_logs[row][0] + "', previous='" + change_logs[row][1] + "', new='" + change_logs[row][2] + "'";
+            var sql = "INSERT INTO change_log SET field='"+ change_logs[row][0] + "', timestamp='"+ timestamp + "', previous='" + change_logs[row][1] + "', new='" + change_logs[row][2] + "'";
             connection.query(sql, 
                 function (err, result) {
                     if (err) throw err;
@@ -117,12 +125,7 @@ app.post('/users', function (req, res) {
             );
         }
     }
-    var sql = "INSERT INTO already_classified SET host='"+ host + "', path='" + path + "'";
-    connection.query(sql, 
-        function (err, result) {
-            if (err) throw err;
-        }
-    );
+    
     res.send("success")
 });
 

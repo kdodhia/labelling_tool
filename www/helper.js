@@ -58,20 +58,20 @@ var categories_l3 = [[[]],
                         ["Select","call state", "screen light", "unknown"],
                         ["Select", "UI Personalization (lock screen)", "Interruption management", "unknown"],
                         ["Select", "Task management", "Cross app communciation", "unknown"],
-                        ["Select", "SDK", "Package ID", "unknown"], []],
+                        ["Select", "SDK", "Package ID", "unknown"], ["unknown"]],
                     [[],
                         ["Select","Backup and Synchronization", "Contact Management", "Blacklist", "Call and SMS", "Contact-based Customization","Email", "Find friends","Record","Fake Calls and SMS", "Remind", "unknown"],
                         ["Select","Task Trigger (Context inference)", "Schedule", "Alarm", "unknown"],
                         ["Select","send sms ", "organize sms (clustering, delete, re-rank)", "extract sms content (check notification)", "block sms", "send sms commands/confirmation","schedule sms", "back up/synchronize sms", "receive msg/messaging", "unknown"],
                         ["Select","access album ", "photo editing", "data backup", "download", "persistent logging", "unknown"],
                         ["Select", "unknown"],
-                        []],
+                        ["unknown"]],
                     [[],
                         ["Select","Flashlight (activate, encode)", "Video streaming/Video chat", "QRCode/Barcode scan", "Document scan (biz card, coupon, check)", "Augment reality","Social Media (sharing, communication)","Text recognition (translation, )", "unknown"],
                         ["Select","Search Nearby Places", "Location-based Customization ", "Transportation Information", "Recording","Map and Navigation", "Geosocial Networking","Geotagging", "Location Spoofing", "Alert and Remind", "Location-based game", "unknown"],
                         ["Select","sound/blow detection", "voice message", "video/voice calling", "voice control/command", "speech recognition","audio/video recording","* call recording", "advertising","authentication","data transmission","music", "unknown"],
                         ["Select", "Game", "step-counter","unknown"],
-                        ["Select", "game", "compass", "step-counter", "unknown"],["Select", "Game", "Speaker/display activation", "unknown"],[]],
+                        ["Select", "game", "compass", "step-counter", "unknown"],["Select", "Game", "Speaker/display activation", "unknown"],["unknown"]],
                     [[],
                         ["unknown"],
                         ["unknown"],
@@ -139,12 +139,12 @@ function add_info() {
                                     for (row in rules) {
                                         rules_dict[rules[row].value] = rules[row].classifier
                                     }
-                                    link = 'https://play.google.com/store/apps/details?id='+current.app;
+                                    link = 'http://www.bing.com/search?q='+current.app;
                                     link_2 = 'https://www.google.com/search?q=' + current.app;
-                                    document.getElementById("app").innerHTML="<i><a href='' onclick='addiframe(); return false;'> " + current.app + "</a></i>";
-                                    document.getElementById("version").innerHTML="<i> " + current.version + "</i>";
-                                    document.getElementById("host").innerHTML="<i> " + current.host + "</i>";
-                                    document.getElementById("path").innerHTML="<i> " + current.path + "</i>";
+                                    document.getElementById("app").innerHTML="<i><a href='' onclick='addiframe(); return false;'> " + current.app + "</a></i><br>";
+                                    document.getElementById("version").innerHTML="<br><i> " + current.version + "</i>";
+                                    document.getElementById("host").innerHTML="<br><i> " + current.host + "</i>";
+                                    document.getElementById("path").innerHTML="<br><i> " + current.path + "</i>";
                                     add_data();
                                     showPartiallyClassified();
                                     showClassified();
@@ -285,7 +285,7 @@ function onSkip(){
 // edit iframe source
 function addiframe() {
     try {
-        document.getElementById('iframe1').src = link_2;
+        document.getElementById('iframe1').src = link;
     } 
     catch(err) {
         document.getElementById('iframe1').src = link_2;
@@ -405,6 +405,9 @@ function onChange(id) {
             inputNode.style.visibility = "visible";
         } else {
             add_options(sliced + "1", categories_l2[index]);
+            if (categories_l1[index] == "junk") {
+                onChange(sliced + "1")
+            }
         }
     } else if (level == "1") {
 
@@ -414,7 +417,7 @@ function onChange(id) {
         while (curNode.firstChild) {
             curNode.removeChild(curNode.firstChild);
         }
-        if (index == 0) {
+        if (categories_l2[prev][index].toLowerCase() == "select") {
             curNode.style.visibility = "hidden";
         }
         add_options(sliced + "2", categories_l3[prev][index])
@@ -472,20 +475,22 @@ function onSubmit() {
             }
         }
         id = function_classified_list[key]+"%_"+"2";
-        if ((document.getElementById(id).value != null) && (document.getElementById(id).value != 0)) {
+        if ((document.getElementById(id).value != null)) {
             var first = document.getElementById(function_classified_list[key] + "%_"+"0").value;
             var second = document.getElementById(function_classified_list[key] + "%_"+"1").value;
-            classifier = categories_l1[first] + '.' + categories_l2[first][second]
-            if (original_classifiers[function_classified_list[key]] != classifier) {
+            if (categories_l3[first][second][document.getElementById(id).value].toLowerCase() != "select") {
+                classifier = categories_l1[first] + '.' + categories_l2[first][second]
+                if (original_classifiers[function_classified_list[key]] != classifier) {
+                    adjusted_key = function_classified_list[key].split(' : ')
+                    var list = [adjusted_key[0], original_classifiers[function_classified_list[key]], classifier]
+                    change_log.push(list)
+                }
+                var second_id = function_classified_list[key]+"%_"+"1";
+                str = categories_l1[first] + "."+ categories_l2[first][document.getElementById(second_id).value] + "."+categories_l3[first][second][document.getElementById(id).value]
+                partially_known_classified[function_classified_list[key]]= str;
                 adjusted_key = function_classified_list[key].split(' : ')
-                var list = [adjusted_key[0], original_classifiers[function_classified_list[key]], classifier]
-                change_log.push(list)
+                rules[adjusted_key[0]]= str;
             }
-            var second_id = function_classified_list[key]+"%_"+"1";
-            str = categories_l1[first] + "."+ categories_l2[first][document.getElementById(second_id).value] + "."+categories_l3[first][second][document.getElementById(id).value]
-            partially_known_classified[function_classified_list[key]]= str;
-            adjusted_key = function_classified_list[key].split(' : ')
-            rules[adjusted_key[0]]= str;
         }
     }
 
@@ -502,22 +507,25 @@ function onSubmit() {
             }
         }
         id = data_list[data]+"%_"+"2";
-        if ((document.getElementById(id).value != null) && (document.getElementById(id).value != 0)) {
+        if ((document.getElementById(id).value != null)) {
             var first = document.getElementById(data_list[data] + "%_"+"0").value;
             var second = document.getElementById(data_list[data] + "%_"+"1").value;
             var second_id = data_list[data]+"%_"+"1";
-            str = categories_l1[first] + "." + categories_l2[first][document.getElementById(second_id).value] + "." + categories_l3[first][second][document.getElementById(id).value]
-            unknown_classified[data_list[data]]= str;
-            adjusted_key = data_list[data].split(' : ')
-            rules[adjusted_key[0]]= str;
+            if (categories_l3[first][second][document.getElementById(id).value].toLowerCase() != "select") {
+                str = categories_l1[first] + "." + categories_l2[first][document.getElementById(second_id).value] + "." + categories_l3[first][second][document.getElementById(id).value]
+                unknown_classified[data_list[data]]= str;
+                adjusted_key = data_list[data].split(' : ')
+                rules[adjusted_key[0]]= str;
+            }   
         }
     }
 
     document.getElementById('iframe1').src = "";
-
+    var timeInMs = Date.now();
 
     var payload = {
         skip: 0,
+        timestamp: timeInMs,
         app: current.app,
         version: current.version,
         host: current.host,
