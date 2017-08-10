@@ -61,7 +61,19 @@
     border-radius: 6px;
     background-color: grey;
     text-align: left;
-    display: none;
+}
+
+#container_3{
+    font-family: 'Ubuntu', sans-serif;
+    margin-left: 70px;
+    width: 80%;
+    border: 1px solid #ccc;
+    padding: 15px 40px 15px;
+    margin-top:20px;
+    box-shadow: 0 0 15px;
+    border-radius: 6px;
+    background-color: grey;
+    text-align: left;
 }
 
 #num_1 {
@@ -118,6 +130,10 @@ label{
 
 p{
     margin-left: 40px; 
+}
+
+#col{
+   align-self: center;
 }
 
 .button {

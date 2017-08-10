@@ -19,19 +19,19 @@ connection.query('CREATE DATABASE IF NOT EXISTS test', function (err) {
         connection.query('CREATE TABLE IF NOT EXISTS labels('
             + 'id INT NOT NULL AUTO_INCREMENT,'
             + 'PRIMARY KEY(id),'
-            + 'app VARCHAR(100),'
-            + 'version VARCHAR(10),'
-            + 'host VARCHAR(100),'
+            + 'app VARCHAR(200),'
+            + 'version VARCHAR(20),'
+            + 'host VARCHAR(200),'
             + 'path VARCHAR(500),'
-            + 'unknown_classified VARCHAR(2000),'
-            + 'partially_known_classified VARCHAR(2000),'
-            + 'prev_labelled VARCHAR(2000)'
+            + 'unknown_classified VARCHAR(5000),'
+            + 'partially_known_classified VARCHAR(5000),'
+            + 'prev_labelled VARCHAR(5000)'
             +  ')', function (err) {
                 if (err) throw err;
         });
-        connection.query('CREATE TABLE IF NOT EXISTS counter(count INT)');
         connection.query('CREATE TABLE IF NOT EXISTS rules(value VARCHAR(200), classifier VARCHAR(200))');
         connection.query('CREATE TABLE IF NOT EXISTS change_log(field VARCHAR(200), previous VARCHAR(200), new VARCHAR(200))');
+        connection.query('CREATE TABLE IF NOT EXISTS already_classified(host VARCHAR(200), path VARCHAR(500))');
     });
 });
 
@@ -43,25 +43,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
 app.use(express.static('www'));
-
-
-
-app.get("/counter", function(req, res) {
-    connection.query('USE test', function (err) {
-        if (err) throw err;
-        connection.query("SELECT * FROM counter", function(err, rows){
-            if(err) {
-                throw err;
-            } else {
-                var count_ = rows[0].count;
-                var obj = {
-                    counter: count_
-                };
-                res.send(obj);
-            }
-        });
-    });
-});
 
 
 app.get("/rules", function(req, res) {
@@ -80,27 +61,45 @@ app.get("/rules", function(req, res) {
     });
 });
 
+app.get("/already_classified", function(req, res) {
+    connection.query('USE test', function (err) {
+        if (err) throw err;
+        connection.query("SELECT * FROM already_classified", function(err, rows){
+            if(err) {
+                throw err;
+            } else {
+                var obj = {
+                    al_classified: rows
+                };
+                res.send(obj);
+            }
+        });
+    });
+});
 
 // Update MySQL database
 app.post('/users', function (req, res) {
     console.log(req.body);
     var bool = req.body.skip;
+    var app = req.body.app;
+    var host = req.body.host;
+    var path =  req.body.path;
+    var version = req.body.version;
+
     if (bool == 0){
-        var app = req.body.app;
-        var version = req.body.version;
-        var host = req.body.host;
-        var path =  req.body.path;
         var unknown_classified = req.body.data_unknown_classified;
         var partially_known_classified = req.body.data_partially_known_classified;
         var prev_labelled = req.body.data_prev_labelled;
         var rules = req.body.rules_dict;
         var change_logs = req.body.data_change_log
+
         var sql = "INSERT INTO labels SET app='"+ app + "', version='" + version + "', host='"+ host + "', path='" + path + "', unknown_classified='"+unknown_classified+ "', partially_known_classified='"+partially_known_classified+ "', prev_labelled='"+prev_labelled+"'";
         connection.query(sql, 
             function (err, result) {
                 if (err) throw err;
             }
         );
+
         for (key in rules) {
             var sql = "INSERT INTO rules SET value='"+ key + "', classifier='" + rules[key] + "'";
             connection.query(sql, 
@@ -118,8 +117,8 @@ app.post('/users', function (req, res) {
             );
         }
     }
-    var sql1 = 'UPDATE counter SET count = count + 1' 
-    connection.query(sql1, 
+    var sql = "INSERT INTO already_classified SET host='"+ host + "', path='" + path + "'";
+    connection.query(sql, 
         function (err, result) {
             if (err) throw err;
         }

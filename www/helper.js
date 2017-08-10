@@ -1,6 +1,6 @@
-var counter = -1;
 var current;
 var link = ""
+var link_2 = ""
 var default_categories = ["Select","Advertising", "Social/Communication", "Game", "Multimedia", "Information", "App-analytic", "Personalization", "Unknown"];
 /*
 var categories_l1 = ["Select","Phone ID", "Phone Status", "Personal Data", "Sensor Data", "Unknown"];
@@ -50,7 +50,7 @@ var categories_l3 = [[[]],
                         ["Select","Tracking signed-out user behavior", "Tracking signed-out user conversion", "unknown"],
                         ["Select","Tracking signed-out user preferences", "Generating signed-out/anonymous user analytics", "Handling multiple installations","Anti-fraud: Enforcing free content limits / detecting Sybil attacks (/DRM)","Authentication (cookie)", "unknown"],
                         ["Select","Managing telephony and carrier functionality", "Abuse detection: Identifying bots and DDoS attacks(/Safenet API)", "Abuse detection: Detecting high value stolen credentials", "unknown"],
-                        ["Select", "unknown"],[]],
+                        ["Select", "unknown"],["unknown"]],
                     [[],
                         ["Select","power management","intelligent power saving","Task Trigger (Context inference)", "unknown"],
                         ["Select","ui customization", "advertising", "language", "OS info","Manufacturer", "unknown"],
@@ -80,7 +80,7 @@ var categories_l3 = [[[]],
                         ["unknown"],
                         ["unknown"],
                         ["unknown"],
-                        []],
+                        ["unknown"]],
                     [["junk"]]];
 
 var data_list = [];
@@ -88,8 +88,26 @@ var function_classified_list = [];
 var rules_dict = {}
 var prev_labelled = {};
 var original_classifiers = {};
+var already_classified_list = [];
+var available = []
 
-
+function findAvailable(dataset) {
+    for (row in dataset) {
+        cur_host  = dataset[row].host;
+        cur_path = dataset[row].path;
+        var flag = false;
+        for (inst in already_classified_list) {
+            if (already_classified_list[inst][0] == cur_host) {
+                if (already_classified_list[inst][1] == cur_path) {
+                    flag = true
+                }
+            }
+        } 
+        if (!flag) {
+            available.push(dataset[row])
+        }
+    }
+}
 
 function add_info() {
     $.ajax({
@@ -99,43 +117,51 @@ function add_info() {
         success: function(dataset) {
 
             $.ajax({
-                url: "/counter",
+                url: "/already_classified",
                 type: "GET",
                 success: function(data) {
-                    counter = data.counter;
-                    if (!(($.isEmptyObject(dataset[counter].data.unknown)) & ($.isEmptyObject(dataset[counter].data.classified)))) {
-                        
-                        $.ajax({
-                            url: "/rules",
-                            type: "GET",
-                            success: function(data_rule) {
-                                rules = data_rule.rules;
-                                for (row in rules) {
-                                    rules_dict[rules[row].value] = rules[row].classifier
-                                }
-                                link = 'https://play.google.com/store/apps/details?id='+dataset[counter].app+'pro&hl=en';
-                                document.getElementById("app").innerHTML="<i><a href='' onclick='addiframe(); return false;'> " + dataset[counter].app + "</a></i>";
-                                document.getElementById("version").innerHTML="<i> " + dataset[counter].version + "</i>";
-                                document.getElementById("host").innerHTML="<i> " + dataset[counter].host + "</i>";
-                                document.getElementById("path").innerHTML="<i> " + dataset[counter].path + "</i>";
-                                add_data(dataset);
-                                current = dataset[counter];
-                                showPredictionClassified();
-                                if ((data_list.length < 1) && (function_classified_list.length < 1)) {
-                                    onSkip();
-                                }
-                            },
-                            error: function(error) {
-                                alert('error loading rules');
-                                console.log(error)
-                            }
-                        });
-
-                    } else {
-                        console.log(dataset[counter])
-                        onSkip();
+                    temp = data.al_classified;
+                    for (row in temp) {
+                        already_classified_list.push([temp[row].host, temp[row].path]);
                     }
-                    
+                    findAvailable(dataset);
+                    if (available.length < 1) {
+                        alert('Labelling Complete.');
+                    } else {
+                        current = available[Math.floor(Math.random() * available.length)];
+                        if (!(($.isEmptyObject(current.data.unknown)) & ($.isEmptyObject(current.data.classified)))) {
+                        
+                            $.ajax({
+                                url: "/rules",
+                                type: "GET",
+                                success: function(data_rule) {
+                                    rules = data_rule.rules;
+                                    for (row in rules) {
+                                        rules_dict[rules[row].value] = rules[row].classifier
+                                    }
+                                    link = 'https://play.google.com/store/apps/details?id='+current.app;
+                                    link_2 = 'https://www.google.com/search?q=' + current.app;
+                                    document.getElementById("app").innerHTML="<i><a href='' onclick='addiframe(); return false;'> " + current.app + "</a></i>";
+                                    document.getElementById("version").innerHTML="<i> " + current.version + "</i>";
+                                    document.getElementById("host").innerHTML="<i> " + current.host + "</i>";
+                                    document.getElementById("path").innerHTML="<i> " + current.path + "</i>";
+                                    add_data();
+                                    showPartiallyClassified();
+                                    showClassified();
+                                    if ((data_list.length < 1) && (function_classified_list.length < 1)) {
+                                        onSubmit();
+                                    }
+                                },
+                                error: function(error) {
+                                    alert('error loading rules');
+                                    console.log(error)
+                                }
+                            });
+
+                        } else {
+                            onSubmit();
+                        }
+                    }
                 },
                 error: function(error) {
                     alert('error loading count');
@@ -167,12 +193,12 @@ function setCols(id, data) {
     document.getElementById(sub_three).style.visibility = "visible";
 }
 
-function showPredictionClassified(){
+function showPartiallyClassified(){
 
     document.getElementById('container_2').style.display = "block";
     for (key in current.data.classified) {
         var key_cut = key;
-        if ((key.charAt(0).toUpperCase() == key.charAt(0)) && (key.charAt(1)=='_')) {
+        if ((key.charAt(1)=='_')) {
             var key_cut = key.substring(2);
         }
         var temp  = key_cut.split(' : ')
@@ -186,6 +212,21 @@ function showPredictionClassified(){
             setCols(key_cut, current.data.classified[key])
             original_classifiers[key_cut] = current.data.classified[key]
         }
+    }
+}
+
+function showClassified() {
+    for (key in prev_labelled) {
+        var div = document.createElement('div');
+        var label = document.createElement('label');
+        var text = document.createTextNode('"' + key + '"   : ' + prev_labelled[key]);
+        label.appendChild(text);
+        
+        div.appendChild(label);
+        var linebreak = document.createElement('br');
+        div.appendChild(linebreak);
+        
+        document.getElementById("container_3").appendChild(div);
     }
 }
 
@@ -208,15 +249,25 @@ function onSkip(){
     while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild);
     }
+    var myNode = document.getElementById("container_3");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
     removePredictionClassified()
     data_list = [];
     function_classified_list = [];
     rules_dict = {};
     prev_labelled = {};
     original_classifiers = {};
+    already_classified_list = [];
+    available = []
     
     var payload = {
-        skip: 1
+        skip: 1,
+        app: current.app,
+        version: current.version,
+        host: current.host,
+        path: current.path
     };
 
     $.ajax({
@@ -233,7 +284,12 @@ function onSkip(){
 
 // edit iframe source
 function addiframe() {
-    document.getElementById('iframe1').src = link;
+    try {
+        document.getElementById('iframe1').src = link_2;
+    } 
+    catch(err) {
+        document.getElementById('iframe1').src = link_2;
+    }
 }
 
 function add_options(id, list) {
@@ -282,7 +338,6 @@ function createRow(id, txt, container) {
 
     var x;
     var t;
-
     for (value in categories_l1) {
         x = document.createElement("option");
         t = document.createTextNode(categories_l1[value]);
@@ -290,14 +345,20 @@ function createRow(id, txt, container) {
         x.value = value;
         sub_one.appendChild(x);
     }
-
-    div.appendChild(sub_one);
-    div.appendChild(sub_two);
-    div.appendChild(sub_three);
-    div.appendChild(input);
+    var div_dropdown = document.createElement('div');
+    div_dropdown.style.marginLeft = "400px"
+    div_dropdown.appendChild(sub_one);
+    div_dropdown.appendChild(sub_two);
+    div_dropdown.appendChild(sub_three);
+    div_dropdown.appendChild(input);
     sub_two.style.visibility = "hidden";
     sub_three.style.visibility = "hidden";
     input.style.visibility = "hidden";
+    sub_one.style.width = "75px"
+    sub_two.style.width = "100px"
+    sub_three.style.width = "250px"
+
+    div.appendChild(div_dropdown);
     
     document.getElementById(container).appendChild(div);
 }
@@ -316,12 +377,15 @@ function onChange(id) {
         inputNode.style.visibility = "hidden";
 
         var curNode = document.getElementById(sliced + "1");
+        curNode.style.width = "100px"
+    
         curNode.style.visibility = "visible";
         while (curNode.firstChild) {
             curNode.removeChild(curNode.firstChild);
         }
 
         var nextNode = document.getElementById(sliced + "2");
+        nextNode.style.width = "250px"
         if (nextNode != null) {
             while (nextNode.firstChild) {
                 nextNode.removeChild(nextNode.firstChild);
@@ -336,6 +400,8 @@ function onChange(id) {
         idx_other = categories_l1.indexOf("other");
         if (index == idx_other) {
             inputNode = document.getElementById(sliced + "3");
+            curNode.style.width = "0px"
+            nextNode.style.width = "0px"
             inputNode.style.visibility = "visible";
         } else {
             add_options(sliced + "1", categories_l2[index]);
@@ -348,7 +414,7 @@ function onChange(id) {
         while (curNode.firstChild) {
             curNode.removeChild(curNode.firstChild);
         }
-        if (index == 0 || index == categories_l2[prev].length-1) {
+        if (index == 0) {
             curNode.style.visibility = "hidden";
         }
         add_options(sliced + "2", categories_l3[prev][index])
@@ -356,19 +422,18 @@ function onChange(id) {
 }
 
 
-function add_data(dataset){   
-    for (key in dataset[counter].data.unknown) {
+function add_data(){   
+    for (key in current.data.unknown) {
         var key_cut = key;
-        if ((key.charAt(0).toUpperCase() == key.charAt(0)) && (key.charAt(1)=='_')) {
+        if ((key.charAt(1)=='_')) {
             var key_cut = key.substring(2);
         }
-        console.log(rules_dict)
         if (key_cut in rules_dict) {
             prev_labelled[key_cut] = rules_dict[key_cut];
         } else {
-            val = dataset[counter].data.unknown[key];
-            if (val.length > 10) {
-                val = val.substring(0, 10) + "...";
+            val = current.data.unknown[key];
+            if (val.length > 20) {
+                val = val.substring(0, 20) + "...";
             }
             var str = key_cut + ' : ' + val;
             data_list.push(str);
@@ -417,7 +482,7 @@ function onSubmit() {
                 change_log.push(list)
             }
             var second_id = function_classified_list[key]+"%_"+"1";
-            str = categories_l2[first][document.getElementById(second_id).value] + "."+categories_l3[first][second][document.getElementById(id).value]
+            str = categories_l1[first] + "."+ categories_l2[first][document.getElementById(second_id).value] + "."+categories_l3[first][second][document.getElementById(id).value]
             partially_known_classified[function_classified_list[key]]= str;
             adjusted_key = function_classified_list[key].split(' : ')
             rules[adjusted_key[0]]= str;
@@ -441,7 +506,7 @@ function onSubmit() {
             var first = document.getElementById(data_list[data] + "%_"+"0").value;
             var second = document.getElementById(data_list[data] + "%_"+"1").value;
             var second_id = data_list[data]+"%_"+"1";
-            str = categories_l2[first][document.getElementById(second_id).value] + "."+categories_l3[first][second][document.getElementById(id).value]
+            str = categories_l1[first] + "." + categories_l2[first][document.getElementById(second_id).value] + "." + categories_l3[first][second][document.getElementById(id).value]
             unknown_classified[data_list[data]]= str;
             adjusted_key = data_list[data].split(' : ')
             rules[adjusted_key[0]]= str;
@@ -468,12 +533,19 @@ function onSubmit() {
     while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild);
     }
+
+    var myNode = document.getElementById("container_3");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
     removePredictionClassified()
     data_list = [];
     function_classified_list = [];
     rules_dict = {};
     prev_labelled = {};
     original_classifiers = {};
+    already_classified_list = [];
+    available = []
     
     $.ajax({
         url: "/users",
@@ -482,7 +554,6 @@ function onSubmit() {
         contentType: "application/json",
         data: JSON.stringify(payload),
         complete: function (data) {
-            alert('Form has been submitted.');
             add_info();
         }
     });
