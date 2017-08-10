@@ -462,10 +462,11 @@ function onSubmit() {
     for (key in function_classified_list) {
         id_first = function_classified_list[key]+"%_"+"0";
         idx_other = categories_l1.indexOf("other");
+        id = function_classified_list[key]+"%_"+"2";
         if (document.getElementById(id_first).value == idx_other) {
             id_input = function_classified_list[key]+"%_"+"3";
             val = document.getElementById(id_input).value
-            if (val != null) {
+            if (val != '') {
                 partially_known_classified[function_classified_list[key]]= val;
                 adjusted_key = function_classified_list[key].split(' : ')
                 rules[adjusted_key[0]]= val;
@@ -473,9 +474,8 @@ function onSubmit() {
                 var list = [adjusted_key[0], original_classifiers[function_classified_list[key]], val]
                 change_log.push(list)
             }
-        }
-        id = function_classified_list[key]+"%_"+"2";
-        if ((document.getElementById(id).value != null)) {
+        } else if ((document.getElementById(id).value != '')) {
+            console.log(document.getElementById(id).value)
             var first = document.getElementById(function_classified_list[key] + "%_"+"0").value;
             var second = document.getElementById(function_classified_list[key] + "%_"+"1").value;
             if (categories_l3[first][second][document.getElementById(id).value].toLowerCase() != "select") {
@@ -496,18 +496,18 @@ function onSubmit() {
 
     for (data in data_list) {
         id_first = data_list[data]+"%_"+"0";
+        id = data_list[data]+"%_"+"2";
         idx_other = categories_l1.indexOf("other");
         if (document.getElementById(id_first).value == idx_other) {
             id_input = data_list[data]+"%_"+"3";
             val = document.getElementById(id_input).value
-            if (val != null) {
+            if (val != '') {
                 unknown_classified[data_list[data]]= val;
                 adjusted_key = data_list[data].split(' : ')
                 rules[adjusted_key[0]]= val;
             }
-        }
-        id = data_list[data]+"%_"+"2";
-        if ((document.getElementById(id).value != null)) {
+        } else if ((document.getElementById(id).value != '')) {
+
             var first = document.getElementById(data_list[data] + "%_"+"0").value;
             var second = document.getElementById(data_list[data] + "%_"+"1").value;
             var second_id = data_list[data]+"%_"+"1";
