@@ -50,6 +50,20 @@
     text-align: left;
 }
 
+#container_p{
+    margin-right: 4%;
+    width: 600px;
+    float: right;
+    vertical-align: top;
+    font-family: 'Ubuntu', sans-serif;
+    border: 1px solid #ccc;
+    padding: 15px 40px 15px;
+    box-shadow: 0 0 15px;
+    border-radius: 6px;
+    background-color: lightgrey;
+    text-align: left;
+}
+
 #container_2{
     font-family: 'Ubuntu', sans-serif;
     margin-left: 70px;
@@ -88,11 +102,15 @@
 #num_2 {
     margin-left: 60px;
 }
+
+#num_3 {
+    margin-left: 80px;
+}
  
 #iframe1 {
     margin-right: 4%;
-    width: 65%;
-    height: 45%;
+    width: 700px;
+    height: 300px;
     float: right;
     vertical-align: top;
 }

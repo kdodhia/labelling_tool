@@ -47,31 +47,32 @@ var categories_l2 = [[],
 
 var categories_l3 = [[[]],
                     [[],
-                        ["Select","Tracking signed-out user behavior", "Tracking signed-out user conversion", "unknown"],
-                        ["Select","Tracking signed-out user preferences", "Generating signed-out/anonymous user analytics", "Handling multiple installations","Anti-fraud: Enforcing free content limits / detecting Sybil attacks (/DRM)","Authentication (cookie)", "unknown"],
-                        ["Select","Managing telephony and carrier functionality", "Abuse detection: Identifying bots and DDoS attacks(/Safenet API)", "Abuse detection: Detecting high value stolen credentials", "unknown"],
-                        ["Select", "unknown"],["unknown"]],
+                        ["Select","Tracking signed-out user behavior", "Tracking signed-out user conversion", "other", "unknown"],
+                        ["Select","Tracking signed-out user preferences", "Generating signed-out/anonymous user analytics", "Handling multiple installations","Anti-fraud: Enforcing free content limits / detecting Sybil attacks (/DRM)","Authentication (cookie)", "other", "unknown"],
+                        ["Select","Managing telephony and carrier functionality", "Abuse detection: Identifying bots and DDoS attacks(/Safenet API)", "Abuse detection: Detecting high value stolen credentials", "other", "unknown"],
+                        ["Select", "other", "unknown"],["unknown"]],
                     [[],
-                        ["Select","power management","intelligent power saving","Task Trigger (Context inference)", "unknown"],
-                        ["Select","ui customization", "advertising", "language", "OS info","Manufacturer", "unknown"],
-                        ["Select","Task Trigger (Context inference)", "lower resolution image", "unknown"],
-                        ["Select","call state", "screen light", "unknown"],
-                        ["Select", "UI Personalization (lock screen)", "Interruption management", "unknown"],
-                        ["Select", "Task management", "Cross app communciation", "unknown"],
-                        ["Select", "SDK", "Package ID", "unknown"], ["unknown"]],
+                        ["Select","power management","intelligent power saving","Task Trigger (Context inference)", "other", "unknown"],
+                        ["Select","ui customization", "advertising", "language", "OS info","Manufacturer", "other", "unknown"],
+                        ["Select","Task Trigger (Context inference)", "lower resolution image", "other", "unknown"],
+                        ["Select","call state", "screen light", "other", "unknown"],
+                        ["Select", "UI Personalization (lock screen)", "Interruption management", "other", "unknown"],
+                        ["Select", "Task management", "Cross app communciation", "other", "unknown"],
+                        ["Select", "SDK", "Package ID", "other", "unknown"], ["unknown"]],
                     [[],
-                        ["Select","Backup and Synchronization", "Contact Management", "Blacklist", "Call and SMS", "Contact-based Customization","Email", "Find friends","Record","Fake Calls and SMS", "Remind", "unknown"],
-                        ["Select","Task Trigger (Context inference)", "Schedule", "Alarm", "unknown"],
-                        ["Select","send sms ", "organize sms (clustering, delete, re-rank)", "extract sms content (check notification)", "block sms", "send sms commands/confirmation","schedule sms", "back up/synchronize sms", "receive msg/messaging", "unknown"],
-                        ["Select","access album ", "photo editing", "data backup", "download", "persistent logging", "unknown"],
+                        ["Select","Backup and Synchronization", "Contact Management", "Blacklist", "Call and SMS", "Contact-based Customization","Email", "Find friends","Record","Fake Calls and SMS", "Remind", "other", "unknown"],
+                        ["Select","Task Trigger (Context inference)", "Schedule", "Alarm", "other", "other", "unknown"],
+                        ["Select","send sms ", "organize sms (clustering, delete, re-rank)", "extract sms content (check notification)", "block sms", "send sms commands/confirmation","schedule sms", "back up/synchronize sms", "receive msg/messaging", "other", "unknown"],
+                        ["Select","access album ", "photo editing", "data backup", "download", "persistent logging", "other", "unknown"],
                         ["Select", "unknown"],
                         ["unknown"]],
                     [[],
-                        ["Select","Flashlight (activate, encode)", "Video streaming/Video chat", "QRCode/Barcode scan", "Document scan (biz card, coupon, check)", "Augment reality","Social Media (sharing, communication)","Text recognition (translation, )", "unknown"],
-                        ["Select","Search Nearby Places", "Location-based Customization ", "Transportation Information", "Recording","Map and Navigation", "Geosocial Networking","Geotagging", "Location Spoofing", "Alert and Remind", "Location-based game", "unknown"],
-                        ["Select","sound/blow detection", "voice message", "video/voice calling", "voice control/command", "speech recognition","audio/video recording","* call recording", "advertising","authentication","data transmission","music", "unknown"],
-                        ["Select", "Game", "step-counter","unknown"],
-                        ["Select", "game", "compass", "step-counter", "unknown"],["Select", "Game", "Speaker/display activation", "unknown"],["unknown"]],
+                        ["Select","Flashlight (activate, encode)", "Video streaming/Video chat", "QRCode/Barcode scan", "Document scan (biz card, coupon, check)", "Augment reality","Social Media (sharing, communication)","Text recognition (translation, )", "other", "unknown"],
+                        ["Select","Search Nearby Places", "Location-based Customization ", "Transportation Information", "Recording","Map and Navigation", "Geosocial Networking","Geotagging", "Location Spoofing", "Alert and Remind", "Location-based game", "other", "unknown"],
+                        ["Select","sound/blow detection", "voice message", "video/voice calling", "voice control/command", "speech recognition","audio/video recording","* call recording", "advertising","authentication","data transmission","music", "other", "unknown"],
+                        ["Select", "Game", "step-counter","other", "unknown"],
+                        ["Select", "game", "compass", "step-counter", "other", "unknown"],
+                        ["Select", "Game", "Speaker/display activation", "other", "unknown"],["unknown"]],
                     [[],
                         ["unknown"],
                         ["unknown"],
@@ -90,6 +91,7 @@ var prev_labelled = {};
 var original_classifiers = {};
 var already_classified_list = [];
 var available = []
+var unique = []
 
 function findAvailable(dataset) {
     for (row in dataset) {
@@ -106,6 +108,106 @@ function findAvailable(dataset) {
         if (!flag) {
             available.push(dataset[row])
         }
+    }
+}
+
+function add_purpose_row(txt, first, second) {
+    var div = document.createElement('div');
+    var label = document.createElement('label');
+    var text = document.createTextNode(txt);
+    var span = document.createElement('span');
+    div.className = 'line';
+    label.appendChild(text);
+    label.appendChild(span);
+    
+    div.appendChild(label);
+
+    var sub_one = document.createElement('select');
+    var input = document.createElement('input');
+    input.type = "text"; 
+    input.placeholder = "Please Specify"
+
+    sub_one.addEventListener("change", function() {
+        onChange_p(this.id);
+    });
+
+    sub_one.id = txt+"%_"+"0";
+    input.id = txt+"%_"+"3";
+
+    var x;
+    var t;
+    for (value in categories_l3[first][second]) {
+        x = document.createElement("option");
+        t = document.createTextNode(categories_l3[first][second][value]);
+        x.appendChild(t);
+        x.value = value;
+        sub_one.appendChild(x);
+    }
+    var div_dropdown = document.createElement('div');
+    div_dropdown.style.marginLeft = "300px"
+    div_dropdown.appendChild(sub_one);
+    div_dropdown.appendChild(input);
+    input.style.visibility = "hidden";
+    sub_one.style.width = "250px"
+
+    div.appendChild(div_dropdown);
+    
+    document.getElementById("container_p").appendChild(div);
+}
+
+function add_purpose_classifier() {
+
+    for (data in function_classified_list) {
+        id_first = function_classified_list[data]+"%_"+"0";
+        id = function_classified_list[data]+"%_"+"1";
+        if (document.getElementById(id).value != '') {
+            var first = document.getElementById(id_first).value;
+            var second = document.getElementById(id).value;
+            if (categories_l2[first][second].toLowerCase() != "select") {
+                str = categories_l1[first] + "." + categories_l2[first][second]
+                if ($.inArray(str, unique) == -1) {
+                    add_purpose_row(str, first, second);
+                    unique.push(str);  
+                }
+            }   
+        }
+    }
+
+    for (data in data_list) {
+        id_first = data_list[data]+"%_"+"0";
+        id = data_list[data]+"%_"+"1";
+        if (document.getElementById(id).value != '') {
+            var first = document.getElementById(id_first).value;
+            var second = document.getElementById(id).value;
+            if (categories_l2[first][second].toLowerCase() != "select") {
+                str = categories_l1[first] + "." + categories_l2[first][second]
+                if ($.inArray(str, unique) == -1) {
+                    add_purpose_row(str, first, second);
+                    unique.push(str);   
+                }
+            }   
+        }
+    }
+}
+
+function onChange_p(id) {
+    temp = sliced = id.substring(0, id.length-3);
+    temp_list = temp.split(".")
+    sliced = id.substring(0, id.length-1);
+    var inputNode = document.getElementById(sliced + "3");
+    var curNode = document.getElementById(sliced + "0");
+    curNode.style.width = "250px"
+    while (inputNode.firstChild) {
+        inputNode.removeChild(inputNode.firstChild);
+    }
+    inputNode.style.visibility = "hidden";
+    var index = document.getElementById(id).value;
+    idx_first = categories_l1.indexOf(temp_list[0]);
+    idx_second = categories_l2[idx_first].indexOf(temp_list[1]);
+    idx_other = categories_l3[idx_first][idx_second].indexOf("other");
+    if (index == idx_other) {
+        curNode.style.width = "100px"
+        inputNode.style.visibility = "visible";
     }
 }
 
@@ -148,6 +250,7 @@ function add_info() {
                                     add_data();
                                     showPartiallyClassified();
                                     showClassified();
+                                    add_purpose_classifier();
                                     if ((data_list.length < 1) && (function_classified_list.length < 1)) {
                                         onSubmit();
                                     }
@@ -189,8 +292,8 @@ function setCols(id, data) {
     add_options(sub_two, categories_l2[idx_one]);
     document.getElementById(sub_two).value = idx_two;
     document.getElementById(sub_two).style.visibility = "visible";
-    add_options(sub_three, categories_l3[idx_one][idx_two]);
-    document.getElementById(sub_three).style.visibility = "visible";
+    //add_options(sub_three, categories_l3[idx_one][idx_two]);
+    //document.getElementById(sub_three).style.visibility = "visible";
 }
 
 function showPartiallyClassified(){
@@ -243,7 +346,7 @@ function onSkip(){
     document.getElementById("loader").style.display = "block";
     document.getElementById("form_sample").style.display = "none";
 
-    document.getElementById('iframe1').src = "";
+    //document.getElementById('iframe1').src = "";
 
     var myNode = document.getElementById("container");
     while (myNode.firstChild) {
@@ -261,6 +364,7 @@ function onSkip(){
     original_classifiers = {};
     already_classified_list = [];
     available = []
+    unique = []
     
     var payload = {
         skip: 1,
@@ -349,7 +453,7 @@ function createRow(id, txt, container) {
     div_dropdown.style.marginLeft = "400px"
     div_dropdown.appendChild(sub_one);
     div_dropdown.appendChild(sub_two);
-    div_dropdown.appendChild(sub_three);
+    //div_dropdown.appendChild(sub_three);
     div_dropdown.appendChild(input);
     sub_two.style.visibility = "hidden";
     sub_three.style.visibility = "hidden";
@@ -383,7 +487,7 @@ function onChange(id) {
         while (curNode.firstChild) {
             curNode.removeChild(curNode.firstChild);
         }
-
+        /*
         var nextNode = document.getElementById(sliced + "2");
         nextNode.style.width = "250px"
         if (nextNode != null) {
@@ -392,7 +496,7 @@ function onChange(id) {
             }
             nextNode.style.visibility = "hidden";
         }
-
+*/
         if (index == 0) {
             curNode.style.visibility = "hidden";
         }
@@ -401,7 +505,7 @@ function onChange(id) {
         if (index == idx_other) {
             inputNode = document.getElementById(sliced + "3");
             curNode.style.width = "0px"
-            nextNode.style.width = "0px"
+            //nextNode.style.width = "0px"
             inputNode.style.visibility = "visible";
         } else {
             add_options(sliced + "1", categories_l2[index]);
@@ -410,6 +514,15 @@ function onChange(id) {
             }
         }
     } else if (level == "1") {
+        first  = document.getElementById(sliced + "0").value
+        second  = document.getElementById(sliced + "1").value
+        str = categories_l1[first] + "." + categories_l2[first][second]
+
+        if ($.inArray(str, unique) == -1) {
+            add_purpose_row(str, first, second);
+            unique.push(str);   
+        }
+        /*
 
         var prev = document.getElementById(sliced + "0").value;
         var curNode = document.getElementById(sliced + "2");
@@ -421,6 +534,7 @@ function onChange(id) {
             curNode.style.visibility = "hidden";
         }
         add_options(sliced + "2", categories_l3[prev][index])
+        */
     }
 }
 
@@ -442,7 +556,6 @@ function add_data(){
             data_list.push(str);
             createRow(str, str, "container");
         }
-        
     }
     document.getElementById("loader").style.display = "none";
     document.getElementById("form_sample").style.display = "block";
@@ -458,11 +571,12 @@ function onSubmit() {
     var rules = {}
     var classifier;
     var change_log = []
+    var purpose_dict = {}
 
     for (key in function_classified_list) {
         id_first = function_classified_list[key]+"%_"+"0";
         idx_other = categories_l1.indexOf("other");
-        id = function_classified_list[key]+"%_"+"2";
+        id = function_classified_list[key]+"%_"+"1";
         if (document.getElementById(id_first).value == idx_other) {
             id_input = function_classified_list[key]+"%_"+"3";
             val = document.getElementById(id_input).value
@@ -478,15 +592,14 @@ function onSubmit() {
             console.log(document.getElementById(id).value)
             var first = document.getElementById(function_classified_list[key] + "%_"+"0").value;
             var second = document.getElementById(function_classified_list[key] + "%_"+"1").value;
-            if (categories_l3[first][second][document.getElementById(id).value].toLowerCase() != "select") {
+            if (categories_l2[first][second].toLowerCase() != "select") {
                 classifier = categories_l1[first] + '.' + categories_l2[first][second]
                 if (original_classifiers[function_classified_list[key]] != classifier) {
                     adjusted_key = function_classified_list[key].split(' : ')
                     var list = [adjusted_key[0], original_classifiers[function_classified_list[key]], classifier]
                     change_log.push(list)
                 }
-                var second_id = function_classified_list[key]+"%_"+"1";
-                str = categories_l1[first] + "."+ categories_l2[first][document.getElementById(second_id).value] + "."+categories_l3[first][second][document.getElementById(id).value]
+                str = categories_l1[first] + "."+ categories_l2[first][second] 
                 partially_known_classified[function_classified_list[key]]= str;
                 adjusted_key = function_classified_list[key].split(' : ')
                 rules[adjusted_key[0]]= str;
@@ -496,7 +609,7 @@ function onSubmit() {
 
     for (data in data_list) {
         id_first = data_list[data]+"%_"+"0";
-        id = data_list[data]+"%_"+"2";
+        id = data_list[data]+"%_"+"1";
         idx_other = categories_l1.indexOf("other");
         if (document.getElementById(id_first).value == idx_other) {
             id_input = data_list[data]+"%_"+"3";
@@ -510,9 +623,8 @@ function onSubmit() {
 
             var first = document.getElementById(data_list[data] + "%_"+"0").value;
             var second = document.getElementById(data_list[data] + "%_"+"1").value;
-            var second_id = data_list[data]+"%_"+"1";
-            if (categories_l3[first][second][document.getElementById(id).value].toLowerCase() != "select") {
-                str = categories_l1[first] + "." + categories_l2[first][document.getElementById(second_id).value] + "." + categories_l3[first][second][document.getElementById(id).value]
+            if (categories_l2[first][second].toLowerCase() != "select") {
+                str = categories_l1[first] + "." + categories_l2[first][second] 
                 unknown_classified[data_list[data]]= str;
                 adjusted_key = data_list[data].split(' : ')
                 rules[adjusted_key[0]]= str;
@@ -520,7 +632,26 @@ function onSubmit() {
         }
     }
 
-    document.getElementById('iframe1').src = "";
+    for (data in unique) {
+        temp_list =  unique[data].split(".")
+        id_first = unique[data]+"%_"+"0";
+        idx_first = categories_l1.indexOf(temp_list[0]);
+        idx_second = categories_l2[idx_first].indexOf(temp_list[1]);
+        idx_other = categories_l3[idx_first][idx_second].indexOf("other");
+        if (document.getElementById(id_first).value == idx_other) {
+            id_input = unique[data]+"%_"+"3";
+            val = document.getElementById(id_input).value
+            if (val != '') {
+                purpose_dict[unique[data]]= val;
+            }
+        } else if ((document.getElementById(id_first).value != '')) {
+            if (categories_l3[idx_first][idx_second][document.getElementById(id_first).value].toLowerCase() != "select") {
+                purpose_dict[unique[data]]= categories_l3[idx_first][idx_second][document.getElementById(id_first).value];
+            }   
+        }
+    }
+
+    //document.getElementById('iframe1').src = "";
     var timeInMs = Date.now();
 
     var payload = {
@@ -534,10 +665,16 @@ function onSubmit() {
         data_partially_known_classified: JSON.stringify(partially_known_classified),
         data_prev_labelled: JSON.stringify(prev_labelled),
         rules_dict: rules,
+        purposes: JSON.stringify(purpose_dict),
         data_change_log: change_log
     };
 
     var myNode = document.getElementById("container");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+
+    var myNode = document.getElementById("container_p");
     while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild);
     }
@@ -554,6 +691,7 @@ function onSubmit() {
     original_classifiers = {};
     already_classified_list = [];
     available = []
+    unique = []
     
     $.ajax({
         url: "/users",

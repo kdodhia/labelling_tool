@@ -30,6 +30,18 @@ connection.query('CREATE DATABASE IF NOT EXISTS test', function (err) {
             +  ')', function (err) {
                 if (err) throw err;
         });
+        connection.query('CREATE TABLE IF NOT EXISTS purposes('
+            + 'id INT NOT NULL AUTO_INCREMENT,'
+            + 'PRIMARY KEY(id),'
+            + 'timestamp BIGINT,'
+            + 'app VARCHAR(200),'
+            + 'version VARCHAR(20),'
+            + 'host VARCHAR(200),'
+            + 'path VARCHAR(500),'
+            + 'purpose VARCHAR(5000)'
+            +  ')', function (err) {
+                if (err) throw err;
+        });
         connection.query('CREATE TABLE IF NOT EXISTS rules(value VARCHAR(200), classifier VARCHAR(200), timestamp BIGINT)');
         connection.query('CREATE TABLE IF NOT EXISTS change_log(field VARCHAR(200), previous VARCHAR(200), new VARCHAR(200), timestamp BIGINT)');
         connection.query('CREATE TABLE IF NOT EXISTS already_classified(host VARCHAR(200), path VARCHAR(500), timestamp BIGINT)');
@@ -87,6 +99,7 @@ app.post('/users', function (req, res) {
     var path =  req.body.path;
     var version = req.body.version;
     var timestamp = req.body.timestamp;
+    var purpose_dict = req.body.purposes;
 
     if (bool == 0){
         var unknown_classified = req.body.data_unknown_classified;
@@ -96,6 +109,12 @@ app.post('/users', function (req, res) {
         var change_logs = req.body.data_change_log
 
         var sql = "INSERT INTO labels SET app='"+ app + "', version='" + version + "', host='"+ host + "', timestamp='"+ timestamp + "', path='" + path + "', unknown_classified='"+unknown_classified+ "', partially_known_classified='"+partially_known_classified+ "', prev_labelled='"+prev_labelled+"'";
+        connection.query(sql, 
+            function (err, result) {
+                if (err) throw err;
+            }
+        );
+        var sql = "INSERT INTO purposes SET app='"+ app + "', version='" + version + "', host='"+ host + "', timestamp='"+ timestamp + "', path='" + path + "', purpose='"+purpose_dict+"'";
         connection.query(sql, 
             function (err, result) {
                 if (err) throw err;
