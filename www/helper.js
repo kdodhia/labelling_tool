@@ -171,8 +171,10 @@ function add_purpose_classifier(purpose_dict) {
             if (categories_l2[first][second].toLowerCase() != "select") {
                 str = categories_l1[first] + "." + categories_l2[first][second]
                 if ($.inArray(str, unique) == -1) {
-                    add_purpose_row(str, first, second, purpose_dict);
-                    unique.push(str);  
+                    if (categories_l1[first] != "junk") {
+                        add_purpose_row(str, first, second, purpose_dict);
+                        unique.push(str);
+                    }   
                 }
             }   
         }
@@ -187,8 +189,10 @@ function add_purpose_classifier(purpose_dict) {
             if (categories_l2[first][second].toLowerCase() != "select") {
                 str = categories_l1[first] + "." + categories_l2[first][second]
                 if ($.inArray(str, unique) == -1) {
-                    add_purpose_row(str, first, second, purpose_dict);
-                    unique.push(str); 
+                    if (categories_l1[first] != "junk") {
+                        add_purpose_row(str, first, second, purpose_dict);
+                        unique.push(str);
+                    }   
                 }
             }   
         }
