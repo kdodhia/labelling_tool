@@ -111,7 +111,7 @@ function findAvailable(dataset) {
     }
 }
 
-function add_purpose_row(txt, first, second) {
+function add_purpose_row(txt, first, second, purpose_dict) {
     var div = document.createElement('div');
     var label = document.createElement('label');
     var text = document.createTextNode(txt);
@@ -143,6 +143,10 @@ function add_purpose_row(txt, first, second) {
         x.value = value;
         sub_one.appendChild(x);
     }
+    if (txt in purpose_dict) {
+        idx = categories_l3[first][second].indexOf(purpose_dict[txt]);
+        sub_one.value = idx
+    }
     var div_dropdown = document.createElement('div');
     div_dropdown.style.marginLeft = "300px"
     div_dropdown.appendChild(sub_one);
@@ -155,7 +159,8 @@ function add_purpose_row(txt, first, second) {
     document.getElementById("container_p").appendChild(div);
 }
 
-function add_purpose_classifier() {
+function add_purpose_classifier(purpose_dict) {
+    document.getElementById("container_p").innerHTML = "<label><strong><i><u> PURPOSE: </u></i></strong></label><br><br>";
 
     for (data in function_classified_list) {
         id_first = function_classified_list[data]+"%_"+"0";
@@ -166,7 +171,7 @@ function add_purpose_classifier() {
             if (categories_l2[first][second].toLowerCase() != "select") {
                 str = categories_l1[first] + "." + categories_l2[first][second]
                 if ($.inArray(str, unique) == -1) {
-                    add_purpose_row(str, first, second);
+                    add_purpose_row(str, first, second, purpose_dict);
                     unique.push(str);  
                 }
             }   
@@ -182,8 +187,8 @@ function add_purpose_classifier() {
             if (categories_l2[first][second].toLowerCase() != "select") {
                 str = categories_l1[first] + "." + categories_l2[first][second]
                 if ($.inArray(str, unique) == -1) {
-                    add_purpose_row(str, first, second);
-                    unique.push(str);   
+                    add_purpose_row(str, first, second, purpose_dict);
+                    unique.push(str); 
                 }
             }   
         }
@@ -250,7 +255,7 @@ function add_info() {
                                     add_data();
                                     showPartiallyClassified();
                                     showClassified();
-                                    add_purpose_classifier();
+                                    add_purpose_classifier({});
                                     if ((data_list.length < 1) && (function_classified_list.length < 1)) {
                                         onSubmit();
                                     }
@@ -467,6 +472,35 @@ function createRow(id, txt, container) {
     document.getElementById(container).appendChild(div);
 }
 
+function add_purpose() {
+    purpose_dict =  {};
+    for (data in unique) {
+        temp_list =  unique[data].split(".")
+        id_first = unique[data]+"%_"+"0";
+        idx_first = categories_l1.indexOf(temp_list[0]);
+        idx_second = categories_l2[idx_first].indexOf(temp_list[1]);
+        idx_other = categories_l3[idx_first][idx_second].indexOf("other");
+        if (document.getElementById(id_first).value == idx_other) {
+            id_input = unique[data]+"%_"+"3";
+            val = document.getElementById(id_input).value
+            if (val != '') {
+                purpose_dict[unique[data]]= val;
+            }
+        } else if ((document.getElementById(id_first).value != '')) {
+            if (categories_l3[idx_first][idx_second][document.getElementById(id_first).value].toLowerCase() != "select") {
+                purpose_dict[unique[data]]= categories_l3[idx_first][idx_second][document.getElementById(id_first).value];
+            }   
+        }
+    }
+
+    var myNode = document.getElementById("container_p");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+    unique = []
+    add_purpose_classifier(purpose_dict);  
+}
+
 function onChange(id) {
     var index = document.getElementById(id).value;
     var level = id.slice(-1);
@@ -519,8 +553,7 @@ function onChange(id) {
         str = categories_l1[first] + "." + categories_l2[first][second]
 
         if ($.inArray(str, unique) == -1) {
-            add_purpose_row(str, first, second);
-            unique.push(str);   
+            add_purpose()
         }
         /*
 
