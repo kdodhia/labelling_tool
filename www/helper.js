@@ -36,14 +36,14 @@ var categories_l3 = [[[]],
                     [[]]];
 */
 
-var categories_l1 = ["Select","id", "phone", "personal", "sensor", "general", "junk", "other"];
+var categories_l1 = ["Select","id", "phone", "personal", "sensor", "general", "irrelevant", "other"];
 var categories_l2 = [[],
                     ["Select", "adid", "instanceid", "hwid", "app", "unknown"],
                     ["Select","battery", "device", "network", "phonestate", "notification", "tasks", "appinfo", "unknown"],
                     ["Select","contact", "calendar", "sms", "storage", "account", "unknown"],
                     ["Select","camera", "location", "microphone", "accelerometer", "gyroscope", "proximity", "unknown"],
                     ["Select","health", "emergency", "advertisement", "analytic", "sharing", "time", "appinfo", "unknown"],
-                    ["junk"]];
+                    ["irrelevant"]];
 
 var categories_l3 = [[[]],
                     [[],
@@ -82,7 +82,7 @@ var categories_l3 = [[[]],
                         ["unknown"],
                         ["unknown"],
                         ["unknown"]],
-                    [["junk"]]];
+                    [["irrelevant"]]];
 
 var data_list = [];
 var function_classified_list = [];
@@ -171,7 +171,7 @@ function add_purpose_classifier(purpose_dict) {
             if (categories_l2[first][second].toLowerCase() != "select") {
                 str = categories_l1[first] + "." + categories_l2[first][second]
                 if ($.inArray(str, unique) == -1) {
-                    if (categories_l1[first] != "junk") {
+                    if (categories_l1[first] != "irrelevant") {
                         add_purpose_row(str, first, second, purpose_dict);
                         unique.push(str);
                     }   
@@ -189,7 +189,7 @@ function add_purpose_classifier(purpose_dict) {
             if (categories_l2[first][second].toLowerCase() != "select") {
                 str = categories_l1[first] + "." + categories_l2[first][second]
                 if ($.inArray(str, unique) == -1) {
-                    if (categories_l1[first] != "junk") {
+                    if (categories_l1[first] != "irrelevant") {
                         add_purpose_row(str, first, second, purpose_dict);
                         unique.push(str);
                     }   
@@ -547,7 +547,7 @@ function onChange(id) {
             inputNode.style.visibility = "visible";
         } else {
             add_options(sliced + "1", categories_l2[index]);
-            if (categories_l1[index] == "junk") {
+            if (categories_l1[index] == "irrelevant") {
                 onChange(sliced + "1")
             }
         }
